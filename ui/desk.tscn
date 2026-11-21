@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[node name="Desk" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.15, 0.13, 0.12, 1)
+
+[node name="Masthead" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+offset_left = 76.0
+offset_top = 32.0
+offset_right = -76.0
+mouse_filter = 2
+
+[node name="IndexTab" type="ColorRect" parent="Masthead"]
+custom_minimum_size = Vector2(9, 32)
+mouse_filter = 2
+color = Color(0.78, 0.37, 0.29, 1)
+
+[node name="Brand" type="Label" parent="Masthead"]
+size_flags_horizontal = 3
+theme_type_variation = &"Readout"
+theme_override_font_sizes/font_size = 24
+text = "4NM   /   FAB OPERATIONS"
+
+[node name="Edition" type="Label" parent="Masthead"]
+theme_type_variation = &"Tag"
+text = "NIGHT SHIFT"
+
+[node name="TopRule" type="HSeparator" parent="."]
+anchor_right = 1.0
+offset_left = 76.0
+offset_top = 80.0
+offset_right = -76.0
+offset_bottom = 82.0
+mouse_filter = 2
+
+[node name="BottomRule" type="HSeparator" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = -64.0
+offset_right = -76.0
+offset_bottom = -62.0
+mouse_filter = 2
+
+[node name="Footer" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = -52.0
+offset_right = -76.0
+offset_bottom = -22.0
+mouse_filter = 2
+
+[node name="Theme" type="Label" parent="Footer"]
+size_flags_horizontal = 3
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 16
+text = "BOUNCE BACK"
+
+[node name="Credit" type="Label" parent="Footer"]
+theme_type_variation = &"Muted"
+theme_override_font_sizes/font_size = 16
+text = "Display type: Kenney"

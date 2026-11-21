@@ -1,0 +1,6 @@
+[gd_resource type="CanvasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/kenney_platformer-pack-industrial/Spritesheet/platformIndustrial_sheet.png" id="sheet"]
+
+[resource]
+diffuse_texture = ExtResource("sheet")

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dnaur3qj01fxj"]
+
+[node name="main" type="Control" unique_id=422654165]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="background" type="ColorRect" parent="." unique_id=735035776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05882353, 0.09019608, 0.16470589, 1)
+
+[node name="UI" type="VBoxContainer" parent="." unique_id=319322829]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -51.0
+offset_right = 20.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="UI" unique_id=291922097]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="UI/TopBar" unique_id=253279308]
+layout_mode = 2
+
+[node name="StabilityBar" type="ProgressBar" parent="UI/TopBar" unique_id=971561387]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="UI" unique_id=66788007]
+layout_mode = 2
+
+[node name="AnswerGrid" type="GridContainer" parent="UI" unique_id=1756799504]
+layout_mode = 2
+
+[node name="Btn1" type="Button" parent="UI/AnswerGrid" unique_id=919562215]
+layout_mode = 2
+
+[node name="Btn2" type="Button" parent="UI/AnswerGrid" unique_id=668357730]
+layout_mode = 2
+
+[node name="Btn3" type="Button" parent="UI/AnswerGrid" unique_id=1801495916]
+layout_mode = 2
+
+[node name="Btn4" type="Button" parent="UI/AnswerGrid" unique_id=2117199136]
+layout_mode = 2

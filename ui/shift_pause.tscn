@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/shift_pause.gd" id="script"]
+
+[node name="ShiftPause" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("script")
+
+[node name="PauseButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -148.0
+offset_top = 18.0
+offset_right = -20.0
+offset_bottom = 68.0
+focus_mode = 0
+tooltip_text = "Stop the clock with P or the controller Menu button."
+text = "Pause"
+
+[node name="Shade" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.06, 0.07, 0.80)
+
+[node name="Center" type="CenterContainer" parent="Shade"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Ticket" type="PanelContainer" parent="Shade/Center"]
+custom_minimum_size = Vector2(540, 0)
+theme_type_variation = &"Ticket"
+
+[node name="Note" type="VBoxContainer" parent="Shade/Center/Ticket"]
+theme_override_constants/separation = 16
+
+[node name="Tag" type="Label" parent="Shade/Center/Ticket/Note"]
+theme_type_variation = &"InkTag"
+text = "CLOCK STOPPED"
+
+[node name="Title" type="Label" parent="Shade/Center/Ticket/Note"]
+theme_type_variation = &"InkHeading"
+text = "On break"
+
+[node name="Actions" type="HBoxContainer" parent="Shade/Center/Ticket/Note"]
+
+[node name="Resume" type="Button" parent="Shade/Center/Ticket/Note/Actions"]
+unique_name_in_owner = true
+focus_next = NodePath("../Leave")
+focus_previous = NodePath("../Leave")
+text = "Resume"
+
+[node name="Leave" type="Button" parent="Shade/Center/Ticket/Note/Actions"]
+unique_name_in_owner = true
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Resume")
+text = "Leave job"
+
+[node name="JumpKey" type="Button" parent="Shade/Center/Ticket/Note"]
+unique_name_in_owner = true
+visible = false
+focus_previous = NodePath("../Actions/Leave")
+focus_next = NodePath("../Actions/Resume")
+text = "Change keyboard jump:  Space"
+
+[connection signal="pressed" from="PauseButton" to="." method="_take_break"]
+[connection signal="pressed" from="Shade/Center/Ticket/Note/Actions/Resume" to="." method="_resume"]
+[connection signal="pressed" from="Shade/Center/Ticket/Note/Actions/Leave" to="." method="_leave"]
+[connection signal="pressed" from="Shade/Center/Ticket/Note/JumpKey" to="." method="_listen_for_jump"]

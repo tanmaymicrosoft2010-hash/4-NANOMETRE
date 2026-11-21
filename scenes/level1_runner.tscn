@@ -1,0 +1,330 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/level1_runner.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/runner/deck.tscn" id="deck"]
+[ext_resource type="PackedScene" path="res://scenes/runner/time_dot.tscn" id="dot"]
+[ext_resource type="PackedScene" path="res://scenes/runner/pad.tscn" id="pad"]
+[ext_resource type="PackedScene" path="res://scenes/runner/hazard.tscn" id="hazard"]
+[ext_resource type="PackedScene" path="res://scenes/runner/gpu.tscn" id="gpu"]
+[ext_resource type="PackedScene" path="res://ui/floor_strip.tscn" id="hud"]
+[ext_resource type="PackedScene" path="res://scenes/runner/touch_controls.tscn" id="touch"]
+[ext_resource type="PackedScene" path="res://scenes/runner/factory_wall.tscn" id="wall"]
+[ext_resource type="PackedScene" path="res://scenes/runner/ladder.tscn" id="ladder"]
+
+[sub_resource type="RectangleShape2D" id="door"]
+size = Vector2(100, 122)
+
+[sub_resource type="Gradient" id="depth"]
+colors = PackedColorArray(0.09, 0.12, 0.13, 0, 0.09, 0.12, 0.13, 0.94)
+
+[sub_resource type="GradientTexture2D" id="shaft"]
+gradient = SubResource("depth")
+fill_to = Vector2(0, 1)
+
+[node name="Level1Runner" type="Node2D"]
+script = ExtResource("script")
+
+[node name="Sky" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="Sky"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.176, 0.235, 0.247, 1)
+
+[node name="ServiceWall" parent="." instance=ExtResource("wall")]
+
+[node name="ShaftDepth" type="TextureRect" parent="."]
+z_index = -1
+offset_top = 380.0
+offset_right = 9860.0
+offset_bottom = 720.0
+texture = SubResource("shaft")
+expand_mode = 1
+mouse_filter = 2
+
+[node name="Track" type="Node2D" parent="."]
+
+[node name="Intake" parent="Track" instance=ExtResource("deck")]
+position = Vector2(0, 540)
+
+[node name="Inspection" parent="Track" instance=ExtResource("deck")]
+position = Vector2(750, 540)
+width = 540
+station = "02  Inspection"
+
+[node name="LiftWorks" parent="Track" instance=ExtResource("deck")]
+position = Vector2(1420, 495)
+width = 560
+station = "03  Lift works"
+
+[node name="Etch" parent="Track" instance=ExtResource("deck")]
+position = Vector2(2080, 360)
+width = 510
+station = "04  Etch"
+label_indent = 92.0
+
+[node name="WetBench" parent="Track" instance=ExtResource("deck")]
+position = Vector2(2710, 510)
+width = 575
+station = "05  Wet bench"
+
+[node name="TestRack" parent="Track" instance=ExtResource("deck")]
+position = Vector2(3680, 450)
+station = "06  Test rack"
+
+[node name="Transfer" parent="Track" instance=ExtResource("deck")]
+position = Vector2(4480, 510)
+width = 580
+station = "07  Wafer transfer"
+
+[node name="SpinCoat" parent="Track" instance=ExtResource("deck")]
+position = Vector2(5174, 475)
+width = 580
+station = "08  Spin coat"
+
+[node name="Bake" parent="Track" instance=ExtResource("deck")]
+position = Vector2(5862, 500)
+station = "09  Bake ovens"
+
+[node name="Scrubber" parent="Track" instance=ExtResource("deck")]
+position = Vector2(6600, 365)
+width = 620
+station = "10  Air scrubber"
+label_indent = 92.0
+
+[node name="Cooling" parent="Track" instance=ExtResource("deck")]
+position = Vector2(7332, 505)
+width = 620
+station = "11  Cooling loop"
+
+[node name="Relay" parent="Track" instance=ExtResource("deck")]
+position = Vector2(8336, 465)
+width = 510
+station = "12  Relay bank"
+
+[node name="BusBars" parent="Track" instance=ExtResource("deck")]
+position = Vector2(8954, 475)
+width = 370
+station = "13  Bus bars"
+
+[node name="Core" parent="Track" instance=ExtResource("deck")]
+position = Vector2(9420, 510)
+width = 440
+station = "14  Factory core"
+
+[node name="ServicePlate" type="Label" parent="."]
+offset_left = 3290.0
+offset_top = 380.0
+theme_type_variation = &"Readout"
+theme_override_font_sizes/font_size = 24
+text = "BRIDGE OUT - TAKE THE LIFT"
+
+[node name="LadderSign" type="Label" parent="."]
+offset_left = 2055.0
+offset_top = 300.0
+offset_right = 2175.0
+theme_type_variation = &"Readout"
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.96, 0.9, 0.76, 1)
+horizontal_alignment = 1
+text = "CLIMB"
+
+[node name="TransferSign" type="Label" parent="."]
+offset_left = 4750.0
+offset_top = 390.0
+theme_type_variation = &"Readout"
+theme_override_font_sizes/font_size = 24
+text = "HALFWAY  /  CORE  →"
+
+[node name="Devices" type="Node2D" parent="."]
+
+[node name="Green01" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(216, 512)
+[node name="Green02" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(375, 432)
+[node name="Green03" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(645, 465)
+[node name="Green04" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(710, 432)
+[node name="Green05" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(1160, 432)
+[node name="Green06" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(1350, 465)
+[node name="Green07" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(2220, 332)
+[node name="Green08" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(2398, 254)
+[node name="Green09" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(3336, 240)
+[node name="Green10" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(3584, 208)
+[node name="Green11" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(4050, 343)
+[node name="Green12" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(4370, 346)
+[node name="Green13" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(4660, 482)
+[node name="Green14" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(5115, 406)
+[node name="Green15" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(5490, 371)
+[node name="Green16" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(5840, 369)
+[node name="Green17" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(6180, 394)
+[node name="Green18" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(6720, 337)
+[node name="Green19" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(6950, 257)
+[node name="Green20" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(8000, 235)
+[node name="Green21" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(8248, 203)
+[node name="Green22" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(8615, 359)
+[node name="Green23" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(8900, 359)
+[node name="Green24" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(9400, 367)
+
+[node name="Red01" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(375, 512)
+kind = "Red"
+[node name="Red02" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(930, 432)
+kind = "Red"
+[node name="Red03" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(1750, 467)
+kind = "Red"
+[node name="Red04" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(2220, 252)
+kind = "Red"
+[node name="Red05" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(2950, 482)
+kind = "Red"
+[node name="Red06" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(3810, 342)
+kind = "Red"
+[node name="Red07" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(4660, 402)
+kind = "Red"
+[node name="Red08" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(5340, 367)
+kind = "Red"
+[node name="Red09" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(6400, 392)
+kind = "Red"
+[node name="Red10" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(6950, 337)
+kind = "Red"
+[node name="Red11" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(7600, 477)
+kind = "Red"
+[node name="Red12" parent="Devices" instance=ExtResource("dot")]
+position = Vector2(9130, 367)
+kind = "Red"
+
+[node name="Fault0" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(1120, 525)
+[node name="Fault1" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(2380, 345)
+[node name="Fault2" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(4000, 435)
+[node name="Fault3" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(5480, 460)
+[node name="Fault4" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(6160, 485)
+[node name="Fault5" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(8600, 450)
+
+[node name="Bounce0" parent="Devices" instance=ExtResource("pad")]
+position = Vector2(3230, 501)
+launch_speed = 1160.0
+
+[node name="CoolingLift" parent="Devices" instance=ExtResource("pad")]
+position = Vector2(7894, 496)
+launch_speed = 1160.0
+
+[node name="FactoryCore" type="Area2D" parent="Devices" groups=["goal"]]
+position = Vector2(9624, 449)
+collision_layer = 0
+
+[node name="Collider" type="CollisionShape2D" parent="Devices/FactoryCore"]
+shape = SubResource("door")
+
+[node name="Frame" type="ColorRect" parent="Devices/FactoryCore"]
+offset_left = -50.0
+offset_top = -61.0
+offset_right = 50.0
+offset_bottom = 61.0
+mouse_filter = 2
+color = Color(0.49, 0.85, 0.74, 1)
+
+[node name="Opening" type="ColorRect" parent="Devices/FactoryCore/Frame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 29.0
+offset_left = 9.0
+offset_right = -9.0
+mouse_filter = 2
+color = Color(0.08, 0.17, 0.17, 1)
+
+[node name="Mark" type="Label" parent="Devices/FactoryCore/Frame"]
+anchor_right = 1.0
+theme_type_variation = &"InkTag"
+horizontal_alignment = 1
+text = "CORE"
+
+[node name="Ladder" parent="." instance=ExtResource("ladder")]
+position = Vector2(2115, 564)
+
+[node name="ScrubberLadder" parent="." instance=ExtResource("ladder")]
+position = Vector2(6635, 569)
+
+[node name="Player" parent="." instance=ExtResource("gpu")]
+position = Vector2(96, 519)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="LineHUD" parent="HUD" instance=ExtResource("hud")]
+unique_name_in_owner = true
+
+[node name="RadioBacking" type="ColorRect" parent="HUD"]
+anchor_right = 1.0
+offset_top = 84.0
+offset_bottom = 140.0
+mouse_filter = 2
+color = Color(0.10, 0.13, 0.13, 1)
+
+[node name="Radio" type="HBoxContainer" parent="HUD"]
+anchor_right = 1.0
+offset_left = 28.0
+offset_top = 94.0
+offset_right = -28.0
+offset_bottom = 134.0
+theme_override_constants/separation = 26
+
+[node name="Bay" type="Label" parent="HUD/Radio"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 20
+text = "01  Intake"
+
+[node name="Message" type="Label" parent="HUD/Radio"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+theme_type_variation = &"Muted"
+theme_override_font_sizes/font_size = 22
+autowrap_mode = 3
+text = "Move to start the clock."
+
+[node name="TouchControls" parent="HUD" instance=ExtResource("touch")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="landed_on" from="Player" to="." method="_set_checkpoint"]
+[connection signal="fell" from="Player" to="." method="_missed_deck"]
+[connection signal="returned" from="Player" to="." method="_on_return"]

@@ -1,0 +1,128 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/end_screen.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/desk.tscn" id="desk"]
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+
+[node name="Desk" parent="." instance=ExtResource("desk")]
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 84.0
+offset_bottom = -64.0
+
+[node name="Report" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(840, 0)
+theme_override_constants/separation = 22
+
+[node name="Kicker" type="Label" parent="Center/Report"]
+theme_type_variation = &"Tag"
+text = "SHIFT REPORT   /   CEO GPU"
+
+[node name="Receipt" type="PanelContainer" parent="Center/Report"]
+theme_type_variation = &"Ticket"
+
+[node name="Print" type="VBoxContainer" parent="Center/Report/Receipt"]
+theme_override_constants/separation = 15
+
+[node name="Order" type="Label" parent="Center/Report/Receipt/Print"]
+unique_name_in_owner = true
+theme_type_variation = &"InkTag"
+text = "LEVEL 01   /   CORE RUN"
+
+[node name="ResultLabel" type="Label" parent="Center/Report/Receipt/Print"]
+unique_name_in_owner = true
+theme_type_variation = &"Title"
+theme_override_font_sizes/font_size = 62
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "CLEARED"
+
+[node name="DetailLabel" type="Label" parent="Center/Report/Receipt/Print"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+autowrap_mode = 3
+text = "The core is back online."
+
+[node name="Rule" type="HSeparator" parent="Center/Report/Receipt/Print"]
+
+[node name="Totals" type="HBoxContainer" parent="Center/Report/Receipt/Print"]
+
+[node name="Time" type="VBoxContainer" parent="Center/Report/Receipt/Print/Totals"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Tag" type="Label" parent="Center/Report/Receipt/Print/Totals/Time"]
+theme_type_variation = &"InkTag"
+text = "TIME LEFT"
+
+[node name="Reserve" type="Label" parent="Center/Report/Receipt/Print/Totals/Time"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+text = "00:00"
+
+[node name="Green" type="VBoxContainer" parent="Center/Report/Receipt/Print/Totals"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Tag" type="Label" parent="Center/Report/Receipt/Print/Totals/Green"]
+theme_type_variation = &"InkTag"
+text = "GREEN DOTS"
+
+[node name="GreenCount" type="Label" parent="Center/Report/Receipt/Print/Totals/Green"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+text = "+5s  x 0"
+
+[node name="Red" type="VBoxContainer" parent="Center/Report/Receipt/Print/Totals"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Tag" type="Label" parent="Center/Report/Receipt/Print/Totals/Red"]
+theme_type_variation = &"InkTag"
+text = "RED DOTS"
+
+[node name="RedCount" type="Label" parent="Center/Report/Receipt/Print/Totals/Red"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+text = "-5s  x 0"
+
+[node name="NextPanel" type="PanelContainer" parent="Center/Report/Receipt/Print"]
+unique_name_in_owner = true
+
+[node name="Next" type="VBoxContainer" parent="Center/Report/Receipt/Print/NextPanel"]
+theme_override_constants/separation = 4
+
+[node name="Tag" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 18
+text = "NEXT JOB"
+
+[node name="Status" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
+theme_type_variation = &"Heading"
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 2 - UNDER PROGRESS"
+
+[node name="Note" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
+theme_type_variation = &"Muted"
+theme_override_font_sizes/font_size = 20
+text = "The math console is still being built. Level 1 is done."
+
+[node name="Actions" type="HBoxContainer" parent="Center/Report"]
+
+[node name="PrimaryButton" type="Button" parent="Center/Report/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 52)
+theme_type_variation = &"Primary"
+text = "Play again"
+
+[node name="HomeButton" type="Button" parent="Center/Report/Actions"]
+unique_name_in_owner = true
+text = "Home"
+
+[connection signal="pressed" from="Center/Report/Actions/PrimaryButton" to="." method="_continue_shift"]
+[connection signal="pressed" from="Center/Report/Actions/HomeButton" to="." method="_home"]

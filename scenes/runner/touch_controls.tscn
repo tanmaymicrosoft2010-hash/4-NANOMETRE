@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="key"]
+size = Vector2(108, 68)
+
+[node name="TouchControls" type="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -98.0
+offset_right = -28.0
+offset_bottom = -30.0
+mouse_filter = 2
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(54, 34)
+shape = SubResource("key")
+shape_centered = false
+passby_press = true
+action = "run_left"
+
+[node name="Face" type="ColorRect" parent="Left"]
+offset_left = -54.0
+offset_top = -34.0
+offset_right = 54.0
+offset_bottom = 34.0
+mouse_filter = 2
+color = Color(0.21, 0.21, 0.20, 0.96)
+
+[node name="Mark" type="Label" parent="Left/Face"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Left"
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(174, 34)
+shape = SubResource("key")
+shape_centered = false
+passby_press = true
+action = "run_right"
+
+[node name="Face" type="ColorRect" parent="Right"]
+offset_left = -54.0
+offset_top = -34.0
+offset_right = 54.0
+offset_bottom = 34.0
+mouse_filter = 2
+color = Color(0.21, 0.21, 0.20, 0.96)
+
+[node name="Mark" type="Label" parent="Right/Face"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Right"
+
+[node name="JumpAnchor" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+mouse_filter = 2
+
+[node name="Jump" type="TouchScreenButton" parent="JumpAnchor"]
+position = Vector2(-54, 34)
+shape = SubResource("key")
+shape_centered = false
+action = "run_jump"
+
+[node name="Face" type="ColorRect" parent="JumpAnchor/Jump"]
+offset_left = -54.0
+offset_top = -34.0
+offset_right = 54.0
+offset_bottom = 34.0
+mouse_filter = 2
+color = Color(0.93, 0.90, 0.80, 0.98)
+
+[node name="Mark" type="Label" parent="JumpAnchor/Jump/Face"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_type_variation = &"Ink"
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Jump"

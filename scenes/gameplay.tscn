@@ -1,0 +1,196 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/gameplay.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/line_hud.tscn" id="hud"]
+
+[node name="Gameplay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.063, 0.129, 0.133, 1)
+
+[node name="LineHUD" parent="." instance=ExtResource("hud")]
+unique_name_in_owner = true
+
+[node name="Bench" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 90.0
+offset_bottom = -12.0
+
+[node name="Console" type="VBoxContainer" parent="Bench"]
+custom_minimum_size = Vector2(848, 0)
+theme_override_constants/separation = 18
+
+[node name="Header" type="HBoxContainer" parent="Bench/Console"]
+
+[node name="Label" type="Label" parent="Bench/Console/Header"]
+size_flags_horizontal = 3
+theme_type_variation = &"Tag"
+text = "OPERATOR   /   CEO GPU"
+
+[node name="LineState" type="Label" parent="Bench/Console/Header"]
+unique_name_in_owner = true
+theme_type_variation = &"Tag"
+text = "LINE STEADY"
+
+[node name="Slip" type="PanelContainer" parent="Bench/Console"]
+theme_type_variation = &"Ticket"
+
+[node name="Print" type="VBoxContainer" parent="Bench/Console/Slip"]
+theme_override_constants/separation = 6
+
+[node name="Batch" type="Label" parent="Bench/Console/Slip/Print"]
+unique_name_in_owner = true
+theme_type_variation = &"InkTag"
+text = "BATCH   N° 001"
+
+[node name="Task" type="Label" parent="Bench/Console/Slip/Print"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+autowrap_mode = 3
+text = "Two wafer lots, one tray. Count the total."
+
+[node name="QuestionLabel" type="Label" parent="Bench/Console/Slip/Print"]
+unique_name_in_owner = true
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 48
+text = "24 + 10 = ?"
+
+[node name="AnswerGrid" type="GridContainer" parent="Bench/Console"]
+unique_name_in_owner = true
+columns = 2
+
+[node name="Answer1" type="Button" parent="Bench/Console/AnswerGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 74)
+size_flags_horizontal = 3
+theme_type_variation = &"Answer"
+text = "28"
+
+[node name="Key" type="Label" parent="Bench/Console/AnswerGrid/Answer1"]
+offset_left = 16.0
+offset_top = 10.0
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 16
+text = "[1]"
+
+[node name="Answer2" type="Button" parent="Bench/Console/AnswerGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 74)
+size_flags_horizontal = 3
+theme_type_variation = &"Answer"
+text = "34"
+
+[node name="Key" type="Label" parent="Bench/Console/AnswerGrid/Answer2"]
+offset_left = 16.0
+offset_top = 10.0
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 16
+text = "[2]"
+
+[node name="Answer3" type="Button" parent="Bench/Console/AnswerGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 74)
+size_flags_horizontal = 3
+theme_type_variation = &"Answer"
+text = "32"
+
+[node name="Key" type="Label" parent="Bench/Console/AnswerGrid/Answer3"]
+offset_left = 16.0
+offset_top = 10.0
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 16
+text = "[3]"
+
+[node name="Answer4" type="Button" parent="Bench/Console/AnswerGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 74)
+size_flags_horizontal = 3
+theme_type_variation = &"Answer"
+text = "36"
+
+[node name="Key" type="Label" parent="Bench/Console/AnswerGrid/Answer4"]
+offset_left = 16.0
+offset_top = 10.0
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 16
+text = "[4]"
+
+[node name="StatusLabel" type="Label" parent="Bench/Console"]
+unique_name_in_owner = true
+theme_type_variation = &"Muted"
+text = "Choose an answer, or use keys 1–4."
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="FlickerOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.025, 0.035, 0.045, 0.55)
+
+[node name="Backup" type="Label" parent="FlickerOverlay"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -20.0
+offset_top = -56.0
+theme_type_variation = &"Tag"
+horizontal_alignment = 1
+text = "POWER DIP   /   BACKUP LIGHT"
+
+[node name="VCPopup" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -90.0
+offset_right = 268.0
+offset_bottom = 144.0
+theme_type_variation = &"Ticket"
+
+[node name="Mail" type="VBoxContainer" parent="VCPopup"]
+alignment = 1
+
+[node name="Sender" type="Label" parent="VCPopup/Mail"]
+theme_type_variation = &"InkTag"
+text = "VC EMAIL   /   INBOX"
+
+[node name="Subject" type="Label" parent="VCPopup/Mail"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 30
+text = "Add AI to 4nm?"
+
+[node name="Footer" type="Label" parent="VCPopup/Mail"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 18
+text = "Sent from the board meeting."
+
+[node name="VCDismissButton" type="Button" parent="VCPopup/Mail"]
+unique_name_in_owner = true
+size_flags_horizontal = 0
+text = "Dismiss email"
+
+[node name="SiteClock" type="Timer" parent="."]
+wait_time = 12.0
+autostart = true
+
+[node name="GridRecovery" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="SiteClock" to="." method="_interrupt"]
+[connection signal="timeout" from="GridRecovery" to="FlickerOverlay" method="hide"]
+[connection signal="pressed" from="VCPopup/Mail/VCDismissButton" to="." method="_file_mail"]

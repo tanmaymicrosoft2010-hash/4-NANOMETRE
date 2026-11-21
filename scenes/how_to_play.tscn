@@ -1,0 +1,145 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/how_to_play.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/desk.tscn" id="desk"]
+
+[node name="HowToPlay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+
+[node name="Desk" parent="." instance=ExtResource("desk")]
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 88.0
+offset_bottom = -66.0
+
+[node name="Manual" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(1080, 0)
+theme_override_constants/separation = 20
+
+[node name="Kicker" type="Label" parent="Center/Manual"]
+theme_type_variation = &"Tag"
+text = "FIELD MANUAL     /     HOW TO PLAY"
+
+[node name="Title" type="Label" parent="Center/Manual"]
+theme_type_variation = &"Heading"
+text = "Keep the fuse alive."
+
+[node name="Columns" type="HBoxContainer" parent="Center/Manual"]
+theme_override_constants/separation = 24
+
+[node name="About" type="PanelContainer" parent="Center/Manual/Columns"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Copy" type="VBoxContainer" parent="Center/Manual/Columns/About"]
+theme_override_constants/separation = 14
+
+[node name="Tag" type="Label" parent="Center/Manual/Columns/About/Copy"]
+theme_type_variation = &"InkTag"
+text = "ABOUT"
+
+[node name="Name" type="Label" parent="Center/Manual/Columns/About/Copy"]
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 34
+text = "4 Nano Metre"
+
+[node name="Body" type="Label" parent="Center/Manual/Columns/About/Copy"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+text = "A bomb is planted under the wafer line at the 4 Nano Metre fab. You are CEO GPU, the only operator left on the floor. Cross the factory and reach the core before the 5:00 fuse burns out.
+
+Level 1 is the factory floor. Level 2 is under progress."
+
+[node name="Controls" type="PanelContainer" parent="Center/Manual/Columns"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Copy" type="VBoxContainer" parent="Center/Manual/Columns/Controls"]
+theme_override_constants/separation = 14
+
+[node name="Tag" type="Label" parent="Center/Manual/Columns/Controls/Copy"]
+theme_type_variation = &"InkTag"
+text = "CONTROLS"
+
+[node name="Grid" type="GridContainer" parent="Center/Manual/Columns/Controls/Copy"]
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="MoveTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "MOVE"
+[node name="Move" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "A / D or arrow keys"
+
+[node name="JumpTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "JUMP"
+[node name="Jump" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "Space or Up"
+
+[node name="LadderTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "LADDER"
+[node name="Ladder" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "Hold Right or W"
+
+[node name="LiftTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "LIFT"
+[node name="Lift" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "Step on and hold Right"
+
+[node name="PauseTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "PAUSE"
+[node name="Pause" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "P or Esc"
+
+[node name="GreenTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "GREEN DOT"
+[node name="Green" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "+5 seconds"
+
+[node name="RedTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "RED DOT"
+[node name="Red" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 24
+text = "-5 seconds"
+
+[node name="Actions" type="HBoxContainer" parent="Center/Manual"]
+theme_override_constants/separation = 14
+
+[node name="PlayButton" type="Button" parent="Center/Manual/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 54)
+theme_type_variation = &"Primary"
+text = "Start level 1"
+
+[node name="BackButton" type="Button" parent="Center/Manual/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 54)
+text = "Back"
+
+[connection signal="pressed" from="Center/Manual/Actions/PlayButton" to="." method="_play"]
+[connection signal="pressed" from="Center/Manual/Actions/BackButton" to="." method="_back"]

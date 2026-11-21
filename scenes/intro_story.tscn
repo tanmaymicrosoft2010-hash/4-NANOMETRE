@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/intro_story.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/desk.tscn" id="desk"]
+[ext_resource type="Texture2D" path="res://ui/gpu_photo.tres" id="portrait"]
+
+[node name="IntroStory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+
+[node name="Desk" parent="." instance=ExtResource("desk")]
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 84.0
+offset_bottom = -64.0
+
+[node name="Stack" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(1040, 0)
+theme_override_constants/separation = 18
+
+[node name="Address" type="Label" parent="Center/Stack"]
+theme_type_variation = &"Tag"
+text = "4 NANO METRE   /   NIGHT SHIFT"
+
+[node name="Receiver" type="HBoxContainer" parent="Center/Stack"]
+theme_override_constants/separation = 20
+
+[node name="Monitor" type="PanelContainer" parent="Center/Stack/Receiver"]
+custom_minimum_size = Vector2(224, 0)
+
+[node name="Channel" type="VBoxContainer" parent="Center/Stack/Receiver/Monitor"]
+theme_override_constants/separation = 8
+
+[node name="Tag" type="Label" parent="Center/Stack/Receiver/Monitor/Channel"]
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 17
+text = "RECEIVER   /   04"
+
+[node name="Operator" type="TextureRect" parent="Center/Stack/Receiver/Monitor/Channel"]
+texture = ExtResource("portrait")
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 156)
+size_flags_vertical = 3
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Center/Stack/Receiver/Monitor/Channel"]
+theme_type_variation = &"Readout"
+theme_override_font_sizes/font_size = 23
+text = "CEO GPU"
+
+[node name="Slip" type="PanelContainer" parent="Center/Stack/Receiver"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Note" type="VBoxContainer" parent="Center/Stack/Receiver/Slip"]
+theme_override_constants/separation = 18
+
+[node name="Folio" type="Label" parent="Center/Stack/Receiver/Slip/Note"]
+unique_name_in_owner = true
+theme_type_variation = &"InkTag"
+text = "FROM: MAINTENANCE"
+
+[node name="Rule" type="HSeparator" parent="Center/Stack/Receiver/Slip/Note"]
+
+[node name="Subject" type="Label" parent="Center/Stack/Receiver/Slip/Note"]
+unique_name_in_owner = true
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 36
+text = "The bomb is real."
+
+[node name="StoryLabel" type="Label" parent="Center/Stack/Receiver/Slip/Note"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 27
+autowrap_mode = 3
+text = "GPU, there is a bomb under the wafer line at the 4 Nano Metre fab. The core door is open. Get there and cut the power.
+
+The fuse has 5:00 on it. Green dots add 5 seconds. Red dots take 5 away. The bridge at Wet bench is out - climb the orange ladder at Etch, then take the green lift."
+
+[node name="Actions" type="HBoxContainer" parent="Center/Stack"]
+
+[node name="NextButton" type="Button" parent="Center/Stack/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 52)
+theme_type_variation = &"Primary"
+text = "Choose factory"
+
+[node name="Previous" type="Button" parent="Center/Stack/Actions"]
+unique_name_in_owner = true
+text = "Back"
+
+[connection signal="pressed" from="Center/Stack/Actions/NextButton" to="." method="_dispatch"]
+[connection signal="pressed" from="Center/Stack/Actions/Previous" to="." method="_back"]

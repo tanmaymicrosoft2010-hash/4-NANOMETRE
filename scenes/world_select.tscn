@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world_select.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/desk.tscn" id="desk"]
+
+[node name="WorldSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+
+[node name="Desk" parent="." instance=ExtResource("desk")]
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 84.0
+offset_bottom = -64.0
+
+[node name="Dispatch" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(1040, 0)
+theme_override_constants/separation = 18
+
+[node name="Kicker" type="Label" parent="Center/Dispatch"]
+unique_name_in_owner = true
+theme_type_variation = &"Tag"
+text = "DISPATCH   /   SITE DIRECTORY"
+
+[node name="Title" type="Label" parent="Center/Dispatch"]
+theme_type_variation = &"Heading"
+text = "Pick a factory"
+
+[node name="Cards" type="HBoxContainer" parent="Center/Dispatch"]
+theme_override_constants/separation = 24
+
+[node name="West" type="PanelContainer" parent="Center/Dispatch/Cards"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Details" type="VBoxContainer" parent="Center/Dispatch/Cards/West"]
+
+[node name="Site" type="HBoxContainer" parent="Center/Dispatch/Cards/West/Details"]
+
+[node name="Code" type="Label" parent="Center/Dispatch/Cards/West/Details/Site"]
+theme_type_variation = &"InkTag"
+size_flags_horizontal = 3
+text = "US   /   CALIFORNIA"
+
+[node name="WestPaint" type="ColorRect" parent="Center/Dispatch/Cards/West/Details/Site"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(42, 10)
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.25, 0.37, 0.46, 1)
+
+[node name="Terminal" type="TextureRect" parent="Center/Dispatch/Cards/West/Details/Site"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(54, 54)
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Region" type="Label" parent="Center/Dispatch/Cards/West/Details"]
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 28
+text = "Silicon Valley"
+
+[node name="WestNote" type="Label" parent="Center/Dispatch/Cards/West/Details"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+custom_minimum_size = Vector2(0, 86)
+autowrap_mode = 3
+text = "Investor emails cover the console every 12 seconds. Clear the inbox; the clock keeps running."
+
+[node name="USAButton" type="Button" parent="Center/Dispatch/Cards/West/Details"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+text = "Enter Silicon Valley"
+
+[node name="East" type="PanelContainer" parent="Center/Dispatch/Cards"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Details" type="VBoxContainer" parent="Center/Dispatch/Cards/East"]
+
+[node name="Site" type="HBoxContainer" parent="Center/Dispatch/Cards/East/Details"]
+
+[node name="Code" type="Label" parent="Center/Dispatch/Cards/East/Details/Site"]
+theme_type_variation = &"InkTag"
+size_flags_horizontal = 3
+text = "IN   /   INDIA"
+
+[node name="EastPaint" type="ColorRect" parent="Center/Dispatch/Cards/East/Details/Site"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(42, 10)
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.48, 0.34, 0.25, 1)
+
+[node name="GridSign" type="TextureRect" parent="Center/Dispatch/Cards/East/Details/Site"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(54, 54)
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Region" type="Label" parent="Center/Dispatch/Cards/East/Details"]
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 28
+text = "Ind Fab"
+
+[node name="EastNote" type="Label" parent="Center/Dispatch/Cards/East/Details"]
+unique_name_in_owner = true
+theme_type_variation = &"Ink"
+custom_minimum_size = Vector2(0, 86)
+autowrap_mode = 3
+text = "A grid dip dims the console every 12 seconds. You can still work by the backup light."
+
+[node name="IndiaButton" type="Button" parent="Center/Dispatch/Cards/East/Details"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+text = "Enter Ind Fab"
+
+[connection signal="pressed" from="Center/Dispatch/Cards/West/Details/USAButton" to="." method="_choose" binds=["USA"]]
+[connection signal="pressed" from="Center/Dispatch/Cards/East/Details/IndiaButton" to="." method="_choose" binds=["INDIA"]]

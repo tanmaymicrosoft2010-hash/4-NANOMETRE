@@ -1,0 +1,31 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Idle__000.png" id="idle"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Jump__004.png" id="jump"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__000.png" id="r0"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__001.png" id="r1"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__002.png" id="r2"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__003.png" id="r3"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__004.png" id="r4"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__005.png" id="r5"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__006.png" id="r6"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__007.png" id="r7"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__008.png" id="r8"]
+[ext_resource type="Texture2D" path="res://assets/yo/templerun/Run__009.png" id="r9"]
+
+[resource]
+animations = [{
+"name": &"idle", "loop": true, "speed": 1.0,
+"frames": [{"duration": 1.0, "texture": ExtResource("idle")}]
+}, {
+"name": &"run", "loop": true, "speed": 15.0,
+"frames": [
+{"duration": 1.0, "texture": ExtResource("r0")}, {"duration": 1.0, "texture": ExtResource("r1")},
+{"duration": 1.0, "texture": ExtResource("r2")}, {"duration": 1.0, "texture": ExtResource("r3")},
+{"duration": 1.0, "texture": ExtResource("r4")}, {"duration": 1.0, "texture": ExtResource("r5")},
+{"duration": 1.0, "texture": ExtResource("r6")}, {"duration": 1.0, "texture": ExtResource("r7")},
+{"duration": 1.0, "texture": ExtResource("r8")}, {"duration": 1.0, "texture": ExtResource("r9")}]
+}, {
+"name": &"jump", "loop": true, "speed": 1.0,
+"frames": [{"duration": 1.0, "texture": ExtResource("jump")}]
+}]

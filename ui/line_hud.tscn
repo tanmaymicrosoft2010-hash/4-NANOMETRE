@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/line_hud.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/shift_pause.tscn" id="pause"]
+
+[node name="LineHUD" type="PanelContainer"]
+anchor_right = 1.0
+mouse_filter = 2
+script = ExtResource("script")
+
+[node name="Row" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 34
+mouse_filter = 2
+
+[node name="Job" type="VBoxContainer" parent="Row"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Site" type="Label" parent="Row/Job"]
+unique_name_in_owner = true
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 17
+text = "SILICON VALLEY"
+
+[node name="Title" type="Label" parent="Row/Job"]
+unique_name_in_owner = true
+theme_type_variation = &"Readout"
+text = "L1 / Core run"
+
+[node name="Clock" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(185, 0)
+theme_override_constants/separation = 0
+
+[node name="Tag" type="Label" parent="Row/Clock"]
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 17
+text = "BOMB CLOCK"
+
+[node name="TimerLabel" type="Label" parent="Row/Clock"]
+unique_name_in_owner = true
+theme_type_variation = &"Readout"
+text = "90.0 s"
+
+[node name="Line" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(236, 0)
+theme_override_constants/separation = 0
+
+[node name="StabilityText" type="Label" parent="Row/Line"]
+unique_name_in_owner = true
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 17
+text = "STABILITY   70%"
+
+[node name="Gauge" type="CenterContainer" parent="Row/Line"]
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="StabilityBar" type="ProgressBar" parent="Row/Line/Gauge"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(236, 12)
+mouse_filter = 2
+value = 70.0
+show_percentage = false
+
+[node name="Points" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(210, 0)
+theme_override_constants/separation = 0
+
+[node name="Tag" type="Label" parent="Row/Points"]
+theme_type_variation = &"Tag"
+theme_override_font_sizes/font_size = 17
+text = "POINTS"
+
+[node name="PointsLabel" type="Label" parent="Row/Points"]
+unique_name_in_owner = true
+theme_type_variation = &"Readout"
+text = "0 / 100"
+
+[node name="PauseSpace" type="Control" parent="Row"]
+custom_minimum_size = Vector2(128, 0)
+mouse_filter = 2
+
+[node name="ShiftPause" parent="." instance=ExtResource("pause")]

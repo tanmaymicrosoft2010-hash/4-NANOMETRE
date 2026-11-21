@@ -1,0 +1,149 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/level_select.gd" id="script"]
+[ext_resource type="PackedScene" path="res://ui/desk.tscn" id="desk"]
+
+[node name="LevelSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+
+[node name="Desk" parent="." instance=ExtResource("desk")]
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 84.0
+offset_bottom = -64.0
+
+[node name="Board" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(1050, 0)
+theme_override_constants/separation = 18
+
+[node name="Kicker" type="Label" parent="Center/Board"]
+theme_type_variation = &"Tag"
+text = "OPEN WORK ORDERS   /   90 SECONDS EACH"
+
+[node name="Header" type="HBoxContainer" parent="Center/Board"]
+
+[node name="WorldLabel" type="Label" parent="Center/Board/Header"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+theme_type_variation = &"Heading"
+text = "Silicon Valley"
+
+[node name="BackButton" type="Button" parent="Center/Board/Header"]
+size_flags_vertical = 4
+text = "Change factory"
+
+[node name="Jobs" type="HBoxContainer" parent="Center/Board"]
+theme_override_constants/separation = 18
+
+[node name="Run" type="PanelContainer" parent="Center/Board/Jobs"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Slip" type="VBoxContainer" parent="Center/Board/Jobs/Run"]
+
+[node name="Tag" type="Label" parent="Center/Board/Jobs/Run/Slip"]
+theme_type_variation = &"InkTag"
+text = "01   /   ON FOOT"
+
+[node name="Title" type="Label" parent="Center/Board/Jobs/Run/Slip"]
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 25
+text = "Core run"
+
+[node name="Task" type="Label" parent="Center/Board/Jobs/Run/Slip"]
+theme_type_variation = &"Ink"
+custom_minimum_size = Vector2(0, 84)
+autowrap_mode = 3
+text = "Reach the core or pick up ten chips. Green pads give you a lift."
+
+[node name="RunRecord" type="Label" parent="Center/Board/Jobs/Run/Slip"]
+unique_name_in_owner = true
+theme_type_variation = &"InkTag"
+theme_override_font_sizes/font_size = 16
+text = "No time on file"
+
+[node name="L1Button" type="Button" parent="Center/Board/Jobs/Run/Slip"]
+unique_name_in_owner = true
+text = "Start L1"
+
+[node name="Sort" type="PanelContainer" parent="Center/Board/Jobs"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Slip" type="VBoxContainer" parent="Center/Board/Jobs/Sort"]
+
+[node name="Tag" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
+theme_type_variation = &"InkTag"
+text = "02   /   CONSOLE"
+
+[node name="Title" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 25
+text = "Wafer sort"
+
+[node name="Task" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
+theme_type_variation = &"Ink"
+custom_minimum_size = Vector2(0, 84)
+autowrap_mode = 3
+text = "Sign off 15 batches. Each right answer puts 10 points on the board."
+
+[node name="SortRecord" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
+unique_name_in_owner = true
+theme_type_variation = &"InkTag"
+theme_override_font_sizes/font_size = 16
+text = "No time on file"
+
+[node name="L2Button" type="Button" parent="Center/Board/Jobs/Sort/Slip"]
+unique_name_in_owner = true
+text = "Start L2"
+
+[node name="Test" type="PanelContainer" parent="Center/Board/Jobs"]
+size_flags_horizontal = 3
+theme_type_variation = &"Ticket"
+
+[node name="Slip" type="VBoxContainer" parent="Center/Board/Jobs/Test"]
+
+[node name="Tag" type="Label" parent="Center/Board/Jobs/Test/Slip"]
+theme_type_variation = &"InkTag"
+text = "03   /   CONSOLE"
+
+[node name="Title" type="Label" parent="Center/Board/Jobs/Test/Slip"]
+theme_type_variation = &"InkHeading"
+theme_override_font_sizes/font_size = 25
+text = "Final test"
+
+[node name="Task" type="Label" parent="Center/Board/Jobs/Test/Slip"]
+theme_type_variation = &"Ink"
+custom_minimum_size = Vector2(0, 84)
+autowrap_mode = 3
+text = "Sign off 20 batches. Bigger lots mean trickier arithmetic."
+
+[node name="TestRecord" type="Label" parent="Center/Board/Jobs/Test/Slip"]
+unique_name_in_owner = true
+theme_type_variation = &"InkTag"
+theme_override_font_sizes/font_size = 16
+text = "No time on file"
+
+[node name="L3Button" type="Button" parent="Center/Board/Jobs/Test/Slip"]
+unique_name_in_owner = true
+text = "Start L3"
+
+[node name="SiteNote" type="HBoxContainer" parent="Center/Board"]
+
+[node name="AccessKey" type="TextureRect" parent="Center/Board/SiteNote"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Hazard" type="Label" parent="Center/Board/SiteNote"]
+unique_name_in_owner = true
+theme_type_variation = &"Muted"
+text = "Investor mail interrupts the console."
+
+[connection signal="pressed" from="Center/Board/Header/BackButton" to="." method="_back"]
