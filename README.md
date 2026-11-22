@@ -1,52 +1,67 @@
 # 4 Nano Metre
 
-You’re CEO GPU, the last operator on shift in a sabotaged chip factory. A bomb is ticking under the wafer line. First, cross fourteen bays to reach the core. Then trade the jump button for a four-cell cursor: somewhere on a flickering terminal is the address you need.
+A retro cyberpunk cleanroom game where you play as CEO GPU, the last operator left on night shift at a semiconductor plant. A bomb has been planted right under the wafer line. Get through 14 factory bays, breach the central airlock, and hack the host terminal before the timer runs out.
 
-**[Download the current two-level build (repository ZIP)](https://github.com/tanmaymicrosoft2010-hash/4-NANOMETRE/archive/refs/heads/main.zip)** · [Play the earlier browser preview on itch.io](https://tanmaylarper.itch.io/4-nanometre)
+[Play online on itch.io](https://tanmaylarper.itch.io/4-nanometre)
 
-## Play the judging build
+---
 
-The ZIP includes the exported game. You’ll need **Python 3 and a desktop browser with WebGL 2**.
+## The mission
 
-1. Extract the ZIP and open a terminal in the folder containing [`serve_web.py`](serve_web.py).
-2. Run `python3 serve_web.py` (Windows: `python serve_web.py`). Open the address printed after `SERVING_ON:`, usually `http://127.0.0.1:8080/`.
-3. Choose **Silicon Valley** for a first run. Your first move starts the fuse. When you reach the core, select **Start Level 2: Host Breach** on the results screen.
+The game is split into two phases:
 
-**Judging with Godot?** Open [`project.godot`](project.godot) in Godot 4.6 and press `F5` for the full game. To try the puzzle immediately, open [`scenes/gameplay.tscn`](scenes/gameplay.tscn) and press `F6`.
+### Phase 1: core run (platformer)
+Make your way across 14 cleanroom bays to reach the reactor core before the clock hits zero.
+- Green resistors (+5s): adds extra time to your fuse.
+- Red hazards and hot plates (-penalty): cuts your timer and sends you back to the last bay checkpoint.
+- Wet bench pneumatic lift: step onto the green lift over the chemical trench and keep holding right to clear the broken bridge.
+- Etch and scrubber ladders: jump onto ladders and hold Right or Up to climb past machinery.
 
-## What to look for
+### Phase 2: host breach (terminal hack)
+Once you reach Bay 14, the core console is locked down. You have to override the mainframe using an IP decryption terminal:
+- An 8 x 10 live number matrix continuously shifts with 2-digit hex octets.
+- Find the target 4-part IP address (like `51.88.66.00`) horizontally in the grid.
+- Watch out for decoys that share the first 1 or 2 octets.
+- Match 3 target IPs before running out of lives or time to trigger the override.
 
-**Level 1 · Core Run.** A green resistor above a hot plate can buy back five seconds. Miss the landing in Shenzhen and you lose eight. That makes each pickup a decision. Falls and hot plates return you to your last bay; red pickups cost time. At the broken bridge by the Wet Bench, step onto the green lift and **keep holding right** to reach the far side.
+---
 
-**Level 2 · Host Breach.** Read the address above the 8×10 grid. If it says `07.42.18.63`, look for `07 42 18 63` side by side in one row. A decoy can start with the same two numbers. Check all four before you commit: a wrong match costs a life and sends the clock into a faster red zone. Match three addresses to win.
+## Factory shifts
 
-| Factory | Starting fuse | Time lost per hit | Host Breach lives |
-| --- | ---: | ---: | ---: |
-| Silicon Valley · Standard | 4:45 | 6 seconds | 3 |
-| Shenzhen · Hard | 3:45 | 8 seconds | 2 |
+Pick your shift from the home screen:
 
-Each level starts with its factory’s fuse. Your best **time remaining** is saved locally for each factory and level.
+| Shift | Location | Fuse time | Hit penalty | Terminal lives | Stability |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| Shift 01 | Silicon Valley (standard) | `04:45` | -6 seconds | 3 lives | 70% |
+| Shift 02 | Shenzhen (hard) | `03:45` | -8 seconds | 2 lives | 60% |
+
+Your best remaining time on cleared runs is saved locally for each factory.
+
+---
 
 ## Controls
 
-- **Core Run:** `A` / `D` or `←` / `→` to move; `Space` or `↑` to jump. Hold `→` or `W` at a ladder to climb. The floor also supports a gamepad and on-screen touch controls.
-- **Host Breach:** Move the selector with `WASD`, the arrow keys, or the mouse. Submit with `Space`, `Enter`, or a left click.
-- **Pause:** `P`, `Esc`, or the on-screen pause button. You can rebind the keyboard jump from the pause menu.
+### Level 1: core run
+| Action | Keyboard | Gamepad | Touch |
+| :--- | :--- | :--- | :--- |
+| Move | `A` / `D` or Arrow keys | Left stick / D-pad | On-screen D-pad |
+| Jump | `Space` or `Up` | Bottom face button (`A` / `X`) | On-screen jump button |
+| Climb | Hold `W` or `Right` at ladder | Push Up / Right | On-screen Up / Right |
+| Pause | `P` or `Esc` | Menu / Start | On-screen pause |
 
-<details>
-<summary><strong>Technical notes for reviewers</strong></summary>
+### Level 2: host breach
+| Action | Input |
+| :--- | :--- |
+| Navigate grid | `W` `A` `S` `D` / Arrow keys / Mouse hover |
+| Select / inject | `Space` / `Enter` / Left click |
 
-- The [movement controller](scripts/runner_motor.gd) remembers a jump pressed up to 120 ms before landing and allows a jump up to 100 ms after stepping off a ledge.
-- The [puzzle generator](scripts/gameplay.gd) places a complete target in every grid before adding decoys. Background cells can change while you search; the target stays readable.
-- The [web export check](tests/web_export_smoke.gd) exercises both factory routes from the packaged game. The [puzzle tests](tests/gta_hacking_test.gd) check target placement, selector bounds, and the results of correct and incorrect choices.
-- A compatible web host can connect an optional ESP32 status light to [game events](scripts/game_state.gd).
+You can rebind your jump key anytime from the in-game pause menu.
 
-</details>
+---
 
-## Team and credits
+## Running the project
 
-**Tanmay Kumar · Samarth Aggrawal · Kavya**
-
-Built with Godot 4.6 and GDScript. Project code: [MIT License](LICENSE). As disclosed on itch.io, AI assistance was used for code.
-
-Industrial tiles and fonts: [Kenney](https://kenney.nl/) · Dispatch controls: [factory_](https://kevins-moms-house.itch.io/factory) by analogStudios / Kevin’s Mom’s House (CC0) · Music and sound clips sourced via [Myinstants](https://www.myinstants.com/).
+### Playing the web build locally
+The repo includes a local server script with the `COOP`/`COEP` headers needed for WebAssembly and Web Audio:
+```bash
+python serve_web.py
