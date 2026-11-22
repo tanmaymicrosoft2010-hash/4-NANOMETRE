@@ -41,4 +41,6 @@ The best time left on each cleared job is saved locally, separately for each fac
 
 With matching Godot export templates installed, use **Project → Export → Web (itch.io)**. Export to an empty folder as `index.html`, zip the contents with `index.html` at the root, and upload the zip as an HTML game. The preset is single-threaded and packages the playable scenes and their dependencies. The suggested embed size is **960 × 540**.
 
+To check the shipped build, extract the zip outside the project and run `godot --headless --main-pack index.pck --script /absolute/path/to/tests/web_export_smoke.gd` from that folder. This opens each factory and plays through a Level 2 recovery using only resources from the exported game.
+
 An ESP32 is optional. On the web, the game calls `window.connectArduino()` and `window.sendToArduino(code)` if the page provides them. The codes are `G` (correct/save), `R` (danger), `B` (boost/recovery) and `X` (failure).

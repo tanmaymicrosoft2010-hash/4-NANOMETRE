@@ -11,6 +11,7 @@ const DIP := 10.0
 const MAIL := 12.0
 
 @onready var hud: LineHUD = %LineHUD
+@onready var effects: Effects = $Effects
 @onready var pads: Array[Button] = [%Answer1, %Answer2, %Answer3, %Answer4]
 
 var seconds := GameState.fuse_seconds()
@@ -137,7 +138,7 @@ func _accept() -> void:
 	%LineState.text = "LINE STEADY"
 	%LineState.modulate = Color.WHITE
 	var origin: Vector2 = %QuestionLabel.get_global_rect().get_center()
-	Effects.celebrate($Effects, $Effects.to_local(origin))
+	effects.celebrate(effects.to_local(origin))
 	_feedback("Bounce Back!  Stability %d.  Ten seconds back on the clock." % stability, ACCEPT)
 
 

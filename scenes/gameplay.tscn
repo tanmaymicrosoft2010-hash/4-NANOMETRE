@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="script"]
 [ext_resource type="PackedScene" path="res://ui/line_hud.tscn" id="hud"]
+[ext_resource type="Script" path="res://scripts/fab_art.gd" id="effects"]
+[ext_resource type="Texture2D" path="res://assets/kenney_particle-pack/PNG (Transparent)/star_04.png" id="spark"]
 
 [node name="Gameplay" type="Control"]
 anchor_right = 1.0
@@ -135,6 +137,8 @@ autowrap_mode = 3
 text = "Choose an answer, or use keys 1–4."
 
 [node name="Effects" type="Node2D" parent="."]
+script = ExtResource("effects")
+spark_texture = ExtResource("spark")
 
 [node name="FlickerOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
