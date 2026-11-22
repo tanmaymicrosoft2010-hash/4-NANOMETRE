@@ -7,12 +7,12 @@ var _card_tweens: Dictionary = {}
 
 
 func _ready() -> void:
-	# Keep the original desk backdrop; the foreground is a separate dispatch UI.
+	# Clean cybernetic dark veil
 	for node in ["Masthead", "TopRule", "BottomRule", "Footer"]:
 		$Desk.get_node(node).hide()
 	var veil := ColorRect.new()
 	veil.name = "HomeVeil"
-	veil.color = Color(0.025, 0.065, 0.07, 0.76)
+	veil.color = Color(0.02, 0.04, 0.08, 0.82)
 	veil.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	veil.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(veil)
@@ -30,6 +30,11 @@ func _ready() -> void:
 	%ConnectButton.pressed.connect(_connect_hardware)
 	%ConnectButton.visible = OS.has_feature("web") and JavaScriptBridge.eval(
 			"typeof window.connectArduino === 'function'")
+	
+	for btn: Button in [%HowToButton, %StoryButton, %ConnectButton]:
+		btn.mouse_entered.connect(func(): SoundFX.play("ui_tick"))
+		btn.focus_entered.connect(func(): SoundFX.play("ui_tick"))
+	
 	%SiliconButton.grab_focus()
 	var layout := $HomeLayout
 	layout.modulate.a = 0.0
@@ -37,25 +42,31 @@ func _ready() -> void:
 
 
 func _animate_card(button: Button, active: bool) -> void:
+	if active:
+		SoundFX.play("ui_tick")
 	if _card_tweens.has(button):
 		(_card_tweens[button] as Tween).kill()
 	var tween := create_tween()
 	_card_tweens[button] = tween
-	var art := button.get_node("ArtClip/Art") as TextureRect
-	tween.tween_property(art, "modulate", Color.WHITE if active else Color(0.82, 0.86, 0.85), 0.22)
+	var art := button.get_node_or_null("ArtClip/Art") as TextureRect
+	if art:
+		tween.tween_property(art, "modulate", Color.WHITE if active else Color(0.82, 0.86, 0.85), 0.22)
 
 
 func _play(site: String) -> void:
+	SoundFX.play("ui_click")
 	GameState.selected_world = site
 	GameState.floor_dispatch = true
 	GameState.start_level(1)
 
 
 func _how_to() -> void:
+	SoundFX.play("ui_click")
 	get_tree().change_scene_to_file(GameState.HOW_TO)
 
 
 func _clock_in() -> void:
+	SoundFX.play("ui_click")
 	GameState.floor_dispatch = true
 	get_tree().change_scene_to_file(GameState.BRIEFING)
 

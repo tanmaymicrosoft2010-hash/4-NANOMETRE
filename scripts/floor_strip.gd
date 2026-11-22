@@ -17,7 +17,7 @@ func set_clock(seconds: float) -> void:
 	shown = whole
 	%TimerLabel.text = "%02d:%02d" % [floori(whole / 60.0), whole % 60]
 	%TimerLabel.add_theme_color_override("font_color",
-			Color("#a33a2c") if seconds <= mini(30.0, GameState.fuse_seconds() * 0.15) else Color("#1f2624"))
+			Color("#ff2a44") if seconds <= mini(30.0, GameState.fuse_seconds() * 0.15) else Color("#00ff88"))
 
 
 func set_dots(green: int, red: int) -> void:

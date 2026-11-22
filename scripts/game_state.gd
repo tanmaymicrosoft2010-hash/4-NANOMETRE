@@ -13,7 +13,7 @@ const HOW_TO := "res://scenes/how_to_play.tscn"
 
 const BOMB_SECONDS := 300.0
 const START_STABILITY := 70
-const JOBS := ["Core run", "Wafer sort", "Final test"]
+const JOBS := ["Core run", "Host Breach", "Core Override"]
 const TARGETS := [100, 150, 200]
 const LOG_PATH := "user://shift_log.cfg"
 const CURSOR := preload("res://assets/kenney_cursor-pixel-pack/Tiles/tile_0168.png")

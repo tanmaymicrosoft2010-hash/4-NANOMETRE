@@ -135,17 +135,18 @@ func _contact(body: Node2D, device: Area2D) -> void:
 func _collect(dot: Area2D) -> void:
 	var green: bool = dot.kind == "Green"
 	dot.queue_free()
-	_play_feedback(green_sound if green else red_sound)
 	if green:
+		SoundFX.play("green_pickup")
 		GameState.green_dots += 1
 		seconds = minf(GameState.fuse_seconds(), seconds + 5.0)
 		GameState.send_hardware_signal("G")
-		_flash("Green dot.  +5 seconds.")
+		_flash("Core Resistor secured.  +5s")
 	else:
+		SoundFX.play("red_hazard")
 		GameState.red_dots += 1
 		seconds = maxf(0.0, seconds - GameState.hit_penalty())
 		GameState.send_hardware_signal("R")
-		_flash("Red dot.  -%d seconds." % int(GameState.hit_penalty()))
+		_flash("Hazard contact!  -%ds" % int(GameState.hit_penalty()))
 	hud.set_dots(GameState.green_dots, GameState.red_dots)
 	hud.set_clock(seconds)
 	if seconds == 0.0:
@@ -162,13 +163,14 @@ func _missed_deck() -> void:
 	if immunity > 0:
 		player.reset_at.call_deferred(checkpoint)
 	else:
-		_play_feedback(fall_sound)
+		SoundFX.play("fall")
 		_damage("Missed the landing")
 
 
 func _play_feedback(clip: AudioStream) -> void:
-	feedback.stream = clip
-	feedback.play()
+	if clip:
+		feedback.stream = clip
+		feedback.play()
 
 
 func _damage(cause: String) -> void:

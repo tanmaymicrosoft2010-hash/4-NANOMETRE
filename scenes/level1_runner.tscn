@@ -10,10 +10,6 @@
 [ext_resource type="PackedScene" path="res://scenes/runner/touch_controls.tscn" id="touch"]
 [ext_resource type="PackedScene" path="res://scenes/runner/factory_wall.tscn" id="wall"]
 [ext_resource type="PackedScene" path="res://scenes/runner/ladder.tscn" id="ladder"]
-[ext_resource type="AudioStream" path="res://assets/audio/money-soundfx.mp3" id="money"]
-[ext_resource type="AudioStream" path="res://assets/audio/tuco-get-out.mp3" id="tuco"]
-[ext_resource type="AudioStream" path="res://assets/audio/spongebob-fail.mp3" id="fall"]
-
 [sub_resource type="RectangleShape2D" id="door"]
 size = Vector2(100, 122)
 
@@ -26,9 +22,6 @@ fill_to = Vector2(0, 1)
 
 [node name="Level1Runner" type="Node2D"]
 script = ExtResource("script")
-green_sound = ExtResource("money")
-red_sound = ExtResource("tuco")
-fall_sound = ExtResource("fall")
 
 [node name="Feedback" type="AudioStreamPlayer" parent="."]
 volume_db = -6.0

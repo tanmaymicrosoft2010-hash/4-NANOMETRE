@@ -13,12 +13,13 @@ config_version=5
 config/name="4 Nano Metre"
 run/main_scene="res://scenes/character_select.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://assets/yo/templerun/Idle__000.png"
+config/icon="res://icon.svg"
 boot_splash/bg_color=Color(0.15, 0.13, 0.12, 1)
 boot_splash/show_image=false
 
 [autoload]
 
+SoundFX="*res://scripts/sound_effects.gd"
 GameState="*res://scripts/game_state.gd"
 BackgroundMusic="*res://scenes/background_music.tscn"
 

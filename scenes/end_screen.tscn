@@ -112,19 +112,19 @@ text = "NEXT JOB"
 [node name="Status" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
 theme_type_variation = &"Heading"
 theme_override_font_sizes/font_size = 28
-text = "LEVEL 2  /  WAFER SORT"
+text = "LEVEL 2  /  HOST BREACH"
 
 [node name="Note" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
 theme_type_variation = &"Muted"
 theme_override_font_sizes/font_size = 19
 theme_override_constants/line_spacing = 6
 autowrap_mode = 3
-text = "Clear wafer batches before the fuse runs out."
+text = "Infiltrate terminal host and brute-force the target IP matrix."
 
 [node name="NextLevelButton" type="Button" parent="Center/Report/Receipt/Print/NextPanel/Next"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 44)
-text = "Start Level 2  →"
+text = "Start Level 2: Host Breach  →"
 
 [node name="Actions" type="HBoxContainer" parent="Center/Report"]
 

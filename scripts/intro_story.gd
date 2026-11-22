@@ -5,14 +5,20 @@ func _ready() -> void:
 	%NextButton.grab_focus()
 	var hard := GameState.selected_world == "SHENZHEN"
 	%Address.text = "4 NANO METRE   /   %s" % GameState.site_name().to_upper()
-	%StoryLabel.text = "GPU, there is a bomb under the wafer line at the 4 Nano Metre fab. The core door is open. Get there and cut the power.\n\nThe fuse has %s on it. Green dots add 5 seconds. Red dots take %d away. The bridge at Wet bench is out - climb the orange ladder at Etch, then take the green lift." % [
+	%StoryLabel.text = "CEO GPU, an explosive device is armed under the wafer fabrication line at the 4 Nano Metre fab. The cleanroom core airlock is compromised.\n\nThe emergency fuse is burning: %s remaining. Core resistors add 5 seconds; thermal hazards and falls penalize %d seconds. Once you breach the core bay, access the host terminal and brute-force the encryption IP to initiate remote override." % [
 			GameState.clock_text(GameState.fuse_seconds()), int(GameState.hit_penalty())]
-	%Subject.text = "Hard shift. The bomb is real." if hard else "The bomb is real."
+	%Subject.text = "CRITICAL ALERT: INTRUSION ACTIVE" if hard else "CRITICAL ALERT: DEFUSE PROTOCOL"
+	
+	for btn: Button in [%NextButton, %BackButton]:
+		btn.mouse_entered.connect(func(): SoundFX.play("ui_tick"))
+		btn.focus_entered.connect(func(): SoundFX.play("ui_tick"))
 
 
 func _dispatch() -> void:
+	SoundFX.play("ui_click")
 	get_tree().change_scene_to_file(GameState.FACTORIES)
 
 
 func _back() -> void:
+	SoundFX.play("ui_click")
 	get_tree().change_scene_to_file(GameState.HOME)

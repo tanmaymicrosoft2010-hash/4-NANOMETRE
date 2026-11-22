@@ -8,9 +8,9 @@ content_margin_left = 26.0
 content_margin_top = 8.0
 content_margin_right = 20.0
 content_margin_bottom = 8.0
-bg_color = Color(0.93, 0.91, 0.84, 1)
-border_width_bottom = 3
-border_color = Color(0.32, 0.30, 0.26, 1)
+bg_color = Color(0.04, 0.08, 0.14, 0.95)
+border_width_bottom = 2
+border_color = Color(0.0, 0.70, 0.90, 0.85)
 
 [node name="FloorStrip" type="PanelContainer"]
 anchor_right = 1.0

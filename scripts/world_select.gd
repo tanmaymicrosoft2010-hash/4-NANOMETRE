@@ -6,7 +6,7 @@ const GRID_SIGN := preload("res://assets/kenney_pixel-platformer-industrial-expa
 
 func _ready() -> void:
 	if GameState.floor_dispatch:
-		%Kicker.text = "CORE RUN   /   DISPATCH"
+		%Kicker.text = "OPERATION DISPATCH   /   SELECT SECTOR"
 		%Terminal.hide()
 		%GridSign.hide()
 		%WestPaint.show()
@@ -16,16 +16,22 @@ func _ready() -> void:
 	else:
 		%Terminal.texture = TERMINAL
 		%GridSign.texture = GRID_SIGN
+	
+	for btn: Button in [%USAButton, %ShenzhenButton]:
+		btn.mouse_entered.connect(func(): SoundFX.play("ui_tick"))
+		btn.focus_entered.connect(func(): SoundFX.play("ui_tick"))
+	
 	var previous: Button = %ShenzhenButton if GameState.selected_world == "SHENZHEN" else %USAButton
 	previous.grab_focus()
 
 
 func _floor_record(site: String) -> String:
 	var best := GameState.best_seconds(1, site)
-	return "Best fuse reserve: %.1f s." % best if best >= 0 else "No floor run signed off yet."
+	return "Best fuse reserve: %.1f s." % best if best >= 0 else "No operational run logged."
 
 
 func _choose(site: String) -> void:
+	SoundFX.play("ui_click")
 	GameState.selected_world = site
 	if GameState.floor_dispatch:
 		GameState.start_level(1)

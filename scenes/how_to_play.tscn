@@ -125,12 +125,20 @@ text = "+5 seconds"
 
 [node name="RedTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
 theme_type_variation = &"InkTag"
-text = "RED DOT"
+text = "RED HAZARD"
 [node name="Red" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
 unique_name_in_owner = true
 theme_type_variation = &"Ink"
 theme_override_font_sizes/font_size = 20
-text = "-5 seconds"
+text = "-6 seconds"
+
+[node name="HackTag" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"InkTag"
+text = "L2 HACK"
+[node name="Hack" type="Label" parent="Center/Manual/Columns/Controls/Copy/Grid"]
+theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 20
+text = "WASD/Arrows/Mouse + Space/Enter/Click"
 
 [node name="Actions" type="HBoxContainer" parent="Center/Manual"]
 theme_override_constants/separation = 14

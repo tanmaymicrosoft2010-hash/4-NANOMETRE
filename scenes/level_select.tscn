@@ -80,12 +80,12 @@ theme_type_variation = &"Ticket"
 
 [node name="Tag" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
 theme_type_variation = &"InkTag"
-text = "02   /   CONSOLE"
+text = "02   /   HACKING TERMINAL"
 
 [node name="Title" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
 theme_type_variation = &"InkHeading"
 theme_override_font_sizes/font_size = 25
-text = "Wafer sort"
+text = "Host Breach"
 
 [node name="Task" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
 theme_type_variation = &"Ink"
@@ -93,7 +93,7 @@ custom_minimum_size = Vector2(0, 96)
 theme_override_font_sizes/font_size = 18
 theme_override_constants/line_spacing = 5
 autowrap_mode = 3
-text = "Sign off 15 batches. Each right answer puts 10 points on the board."
+text = "Infiltrate terminal host and brute-force the target IP in the matrix grid before lockout."
 
 [node name="SortRecord" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
 unique_name_in_owner = true
@@ -103,7 +103,7 @@ text = "No time on file"
 
 [node name="L2Button" type="Button" parent="Center/Board/Jobs/Sort/Slip"]
 unique_name_in_owner = true
-text = "Start L2"
+text = "Start L2: Host Breach  →"
 
 [node name="Test" type="PanelContainer" parent="Center/Board/Jobs"]
 size_flags_horizontal = 3
@@ -113,12 +113,12 @@ theme_type_variation = &"Ticket"
 
 [node name="Tag" type="Label" parent="Center/Board/Jobs/Test/Slip"]
 theme_type_variation = &"InkTag"
-text = "03   /   CONSOLE"
+text = "03   /   MAINFRAME OVERRIDE"
 
 [node name="Title" type="Label" parent="Center/Board/Jobs/Test/Slip"]
 theme_type_variation = &"InkHeading"
 theme_override_font_sizes/font_size = 25
-text = "Final test"
+text = "Core Override"
 
 [node name="Task" type="Label" parent="Center/Board/Jobs/Test/Slip"]
 theme_type_variation = &"Ink"
@@ -126,7 +126,7 @@ custom_minimum_size = Vector2(0, 96)
 theme_override_font_sizes/font_size = 18
 theme_override_constants/line_spacing = 5
 autowrap_mode = 3
-text = "Sign off 20 batches. Bigger lots mean trickier arithmetic."
+text = "Multi-stage counter-intrusion bypass with accelerating encryption cycles."
 
 [node name="TestRecord" type="Label" parent="Center/Board/Jobs/Test/Slip"]
 unique_name_in_owner = true
@@ -136,7 +136,7 @@ text = "No time on file"
 
 [node name="L3Button" type="Button" parent="Center/Board/Jobs/Test/Slip"]
 unique_name_in_owner = true
-text = "Start L3"
+text = "Start L3: Override  →"
 
 [node name="SiteNote" type="HBoxContainer" parent="Center/Board"]
 

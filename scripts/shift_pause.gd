@@ -36,7 +36,14 @@ func _notification(what: int) -> void:
 			_take_break()
 
 
+func _ready() -> void:
+	for btn: Button in [%Resume, %Leave, %JumpKey]:
+		btn.mouse_entered.connect(func(): SoundFX.play("ui_tick"))
+		btn.focus_entered.connect(func(): SoundFX.play("ui_tick"))
+
+
 func _take_break() -> void:
+	SoundFX.play("ui_click")
 	previous_focus = get_viewport().gui_get_focus_owner()
 	%JumpKey.visible = GameState.selected_level == 1
 	_label_jump_key()
@@ -49,6 +56,7 @@ func _take_break() -> void:
 
 
 func _resume() -> void:
+	SoundFX.play("ui_click")
 	listening_for_key = false
 	get_tree().paused = false
 	$Shade.hide()
@@ -58,6 +66,7 @@ func _resume() -> void:
 
 
 func _leave() -> void:
+	SoundFX.play("ui_click")
 	get_tree().paused = false
 	get_tree().change_scene_to_file(GameState.HOME)
 

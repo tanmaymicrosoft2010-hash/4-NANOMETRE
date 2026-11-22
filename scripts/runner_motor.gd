@@ -198,3 +198,4 @@ func _launch(speed: float) -> void:
 	velocity.y = speed
 	coyote = 0
 	buffered_jump = 0
+	SoundFX.play("jump")

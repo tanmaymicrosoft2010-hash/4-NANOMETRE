@@ -1,9 +1,7 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="AudioStream" path="res://assets/audio/leappad3-menu-music.mp3" id="music"]
+[ext_resource type="Script" path="res://scripts/background_music.gd" id="script"]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("music")
-volume_db = -18.0
-autoplay = true
+script = ExtResource("script")
