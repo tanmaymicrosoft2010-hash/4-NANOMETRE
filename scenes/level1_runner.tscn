@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/level1_runner.gd" id="script"]
 [ext_resource type="PackedScene" path="res://scenes/runner/deck.tscn" id="deck"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" path="res://scenes/runner/touch_controls.tscn" id="touch"]
 [ext_resource type="PackedScene" path="res://scenes/runner/factory_wall.tscn" id="wall"]
 [ext_resource type="PackedScene" path="res://scenes/runner/ladder.tscn" id="ladder"]
+[ext_resource type="AudioStream" path="res://assets/audio/money-soundfx.mp3" id="money"]
+[ext_resource type="AudioStream" path="res://assets/audio/tuco-get-out.mp3" id="tuco"]
+[ext_resource type="AudioStream" path="res://assets/audio/spongebob-fail.mp3" id="fall"]
 
 [sub_resource type="RectangleShape2D" id="door"]
 size = Vector2(100, 122)
@@ -23,6 +26,12 @@ fill_to = Vector2(0, 1)
 
 [node name="Level1Runner" type="Node2D"]
 script = ExtResource("script")
+green_sound = ExtResource("money")
+red_sound = ExtResource("tuco")
+fall_sound = ExtResource("fall")
+
+[node name="Feedback" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
 
 [node name="Sky" type="CanvasLayer" parent="."]
 layer = -1
@@ -120,16 +129,6 @@ offset_top = 380.0
 theme_type_variation = &"Readout"
 theme_override_font_sizes/font_size = 24
 text = "BRIDGE OUT - TAKE THE LIFT"
-
-[node name="LadderSign" type="Label" parent="."]
-offset_left = 2055.0
-offset_top = 300.0
-offset_right = 2175.0
-theme_type_variation = &"Readout"
-theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.96, 0.9, 0.76, 1)
-horizontal_alignment = 1
-text = "CLIMB"
 
 [node name="TransferSign" type="Label" parent="."]
 offset_left = 4750.0
@@ -239,6 +238,9 @@ position = Vector2(6160, 485)
 [node name="Fault5" parent="Devices" instance=ExtResource("hazard")]
 position = Vector2(8600, 450)
 
+[node name="Fault6" parent="Devices" instance=ExtResource("hazard")]
+position = Vector2(7420, 435)
+
 [node name="Bounce0" parent="Devices" instance=ExtResource("pad")]
 position = Vector2(3230, 501)
 launch_speed = 1160.0
@@ -317,7 +319,8 @@ text = "01  Intake"
 unique_name_in_owner = true
 size_flags_horizontal = 3
 theme_type_variation = &"Muted"
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 19
+theme_override_constants/line_spacing = 4
 autowrap_mode = 3
 text = "Move to start the clock."
 

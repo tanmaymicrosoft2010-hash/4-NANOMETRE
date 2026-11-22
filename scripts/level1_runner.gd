@@ -4,11 +4,16 @@ const Motor := preload("res://scripts/runner_motor.gd")
 const Deck := preload("res://scripts/runner_deck.gd")
 const FloorStrip := preload("res://scripts/floor_strip.gd")
 
+@export var green_sound: AudioStream
+@export var red_sound: AudioStream
+@export var fall_sound: AudioStream
+
 @onready var player: Motor = $Player
 @onready var hud: FloorStrip = %LineHUD
+@onready var feedback: AudioStreamPlayer = $Feedback
 @onready var checkpoint := player.position
 
-var seconds := GameState.BOMB_SECONDS
+var seconds := GameState.fuse_seconds()
 var immunity := 0.0
 var message_time := 0.0
 var finished := false
@@ -25,7 +30,7 @@ func _ready() -> void:
 	GameState.green_dots = 0
 	GameState.red_dots = 0
 	hud.setup()
-	var warm := GameState.selected_world == "INDIA"
+	var warm := GameState.selected_world == "SHENZHEN"
 	$Sky/Background.color = Color("#3b2c25") if warm else Color("#2d3c3f")
 	for deck: Deck in $Track.get_children():
 		deck.paint(warm)
@@ -130,16 +135,17 @@ func _contact(body: Node2D, device: Area2D) -> void:
 func _collect(dot: Area2D) -> void:
 	var green: bool = dot.kind == "Green"
 	dot.queue_free()
+	_play_feedback(green_sound if green else red_sound)
 	if green:
 		GameState.green_dots += 1
-		seconds = minf(GameState.BOMB_SECONDS, seconds + 5.0)
+		seconds = minf(GameState.fuse_seconds(), seconds + 5.0)
 		GameState.send_hardware_signal("G")
 		_flash("Green dot.  +5 seconds.")
 	else:
 		GameState.red_dots += 1
-		seconds = maxf(0.0, seconds - 5.0)
+		seconds = maxf(0.0, seconds - GameState.hit_penalty())
 		GameState.send_hardware_signal("R")
-		_flash("Red dot.  -5 seconds.")
+		_flash("Red dot.  -%d seconds." % int(GameState.hit_penalty()))
 	hud.set_dots(GameState.green_dots, GameState.red_dots)
 	hud.set_clock(seconds)
 	if seconds == 0.0:
@@ -151,19 +157,25 @@ func _on_return() -> void:
 
 
 func _missed_deck() -> void:
+	if finished:
+		return
 	if immunity > 0:
 		player.reset_at.call_deferred(checkpoint)
 	else:
+		_play_feedback(fall_sound)
 		_damage("Missed the landing")
+
+
+func _play_feedback(clip: AudioStream) -> void:
+	feedback.stream = clip
+	feedback.play()
 
 
 func _damage(cause: String) -> void:
 	if finished or immunity > 0:
 		return
 	trips += 1
-	GameState.red_dots += 1
-	seconds = maxf(0.0, seconds - 5.0)
-	hud.set_dots(GameState.green_dots, GameState.red_dots)
+	seconds = maxf(0.0, seconds - GameState.hit_penalty())
 	hud.set_clock(seconds)
 	GameState.send_hardware_signal("R")
 	if seconds == 0.0:
@@ -172,7 +184,7 @@ func _damage(cause: String) -> void:
 	immunity = 0.8
 	player.modulate.a = 0.55
 	player.reset_at.call_deferred(checkpoint)
-	_flash("%s.  -5 seconds.  Back to %s." % [cause, %Bay.text])
+	_flash("%s.  -%d seconds.  Back to %s." % [cause, int(GameState.hit_penalty()), %Bay.text])
 
 
 func _flash(note: String) -> void:
@@ -183,6 +195,4 @@ func _flash(note: String) -> void:
 func _finish(saved: bool, note: String) -> void:
 	finished = true
 	player.set_physics_process(false)
-	if saved:
-		note += "  Green dots: %d.  Red dots: %d." % [GameState.green_dots, GameState.red_dots]
 	GameState.finish_level(saved, seconds, 0, note)

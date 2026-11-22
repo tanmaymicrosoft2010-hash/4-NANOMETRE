@@ -7,12 +7,14 @@ const NUMPAD := [KEY_KP_1, KEY_KP_2, KEY_KP_3, KEY_KP_4]
 const BENCH := Color("#102122")
 const ACCEPT := Color("#a2e9bf")
 const REJECT := Color("#ffac89")
+const DIP := 10.0
+const MAIL := 12.0
 
 @onready var hud: LineHUD = %LineHUD
 @onready var pads: Array[Button] = [%Answer1, %Answer2, %Answer3, %Answer4]
 
-var seconds := GameState.BOMB_SECONDS
-var stability := GameState.START_STABILITY
+var seconds := GameState.fuse_seconds()
+var stability := GameState.start_stability()
 var red_zone := false
 var recovery := 0
 var batch := 0
@@ -27,6 +29,8 @@ func _ready() -> void:
 	# Running this scene directly in the editor opens the first console job.
 	GameState.selected_level = maxi(2, GameState.selected_level)
 	GameState.points = 0
+	$SiteClock.wait_time = DIP if GameState.selected_world == "SHENZHEN" else MAIL
+	$GridRecovery.wait_time = 2.0 if GameState.selected_world == "SHENZHEN" else 1.5
 	hud.setup()
 	for i in pads.size():
 		pads[i].pressed.connect(_submit.bind(i))
@@ -123,7 +127,7 @@ func _accept() -> void:
 		return
 	red_zone = false
 	recovery = 0
-	stability = 80
+	stability = GameState.recover_stability()
 	seconds += 10.0
 	GameState.send_hardware_signal("B")
 	lamp.kill()
@@ -134,13 +138,13 @@ func _accept() -> void:
 	%LineState.modulate = Color.WHITE
 	var origin: Vector2 = %QuestionLabel.get_global_rect().get_center()
 	Effects.celebrate($Effects, $Effects.to_local(origin))
-	_feedback("Bounce Back!  Stability 80.  Ten seconds back on the clock.", ACCEPT)
+	_feedback("Bounce Back!  Stability %d.  Ten seconds back on the clock." % stability, ACCEPT)
 
 
 func _reject() -> void:
-	stability = maxi(0, stability - 25)
+	stability = maxi(0, stability - GameState.mistake_cost())
 	recovery = 0
-	_feedback("Batch rejected. The answer was %d.  −25 stability." % solution, REJECT)
+	_feedback("Batch rejected. The answer was %d.  −%d stability." % [solution, GameState.mistake_cost()], REJECT)
 	if stability == 0 or (stability > 30 and not red_zone):
 		return
 	%LineState.text = "RED ZONE   /   0 OF 3"
@@ -165,7 +169,7 @@ func _feedback(message: String, color: Color) -> void:
 func _interrupt() -> void:
 	if finished:
 		return
-	if GameState.selected_world == "INDIA":
+	if GameState.selected_world == "SHENZHEN":
 		%FlickerOverlay.show()
 		$GridRecovery.start()
 	elif not %VCPopup.visible:

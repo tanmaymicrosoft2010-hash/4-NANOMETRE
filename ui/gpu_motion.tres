@@ -26,6 +26,13 @@ animations = [{
 {"duration": 1.0, "texture": ExtResource("r6")}, {"duration": 1.0, "texture": ExtResource("r7")},
 {"duration": 1.0, "texture": ExtResource("r8")}, {"duration": 1.0, "texture": ExtResource("r9")}]
 }, {
+"name": &"climb", "loop": true, "speed": 8.0,
+"frames": [
+{"duration": 1.0, "texture": ExtResource("r1")},
+{"duration": 1.0, "texture": ExtResource("r2")},
+{"duration": 1.0, "texture": ExtResource("r6")},
+{"duration": 1.0, "texture": ExtResource("r7")}]
+}, {
 "name": &"jump", "loop": true, "speed": 1.0,
 "frames": [{"duration": 1.0, "texture": ExtResource("jump")}]
 }]

@@ -5,7 +5,7 @@ const ACCESS_KEY := preload("res://assets/kenney_simplified-platformer-pack/PNG/
 
 func _ready() -> void:
 	%WorldLabel.text = GameState.site_name()
-	%Hazard.text = ("The console dims during a power dip." if GameState.selected_world == "INDIA"
+	%Hazard.text = ("Hard shift: power dips every 10 seconds; mistakes cost 30 stability." if GameState.selected_world == "SHENZHEN"
 			else "Investor mail interrupts the console.")
 	%AccessKey.texture = ACCESS_KEY
 	var buttons: Array[Button] = [%L1Button, %L2Button, %L3Button]

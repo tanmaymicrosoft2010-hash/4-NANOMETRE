@@ -1,0 +1,128 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/line_preview.gd" id="script"]
+[ext_resource type="SpriteFrames" path="res://ui/gpu_motion.tres" id="poses"]
+[ext_resource type="Script" path="res://scripts/factory_scenery.gd" id="scenery"]
+[ext_resource type="Texture2D" path="res://scenes/runner/factory_sheet.tres" id="sheet"]
+[ext_resource type="PackedScene" path="res://scenes/runner/deck.tscn" id="deck"]
+[ext_resource type="PackedScene" path="res://scenes/runner/pad.tscn" id="lift"]
+[ext_resource type="PackedScene" path="res://scenes/runner/time_dot.tscn" id="dot"]
+[ext_resource type="FontFile" path="res://assets/kenney_ui-pack-space-expansion/Font/Kenney Future Narrow.ttf" id="display"]
+
+[sub_resource type="StyleBoxFlat" id="frame"]
+bg_color = Color(0.063, 0.11, 0.12, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.29, 0.29, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="PressMonitor" type="PanelContainer"]
+theme_override_styles/panel = SubResource("frame")
+
+[node name="Rows" type="VBoxContainer" parent="."]
+theme_override_constants/separation = 0
+mouse_filter = 2
+
+[node name="Header" type="HBoxContainer" parent="Rows"]
+custom_minimum_size = Vector2(0, 38)
+theme_override_constants/separation = 8
+mouse_filter = 2
+
+[node name="Live" type="Label" parent="Rows/Header"]
+offset_left = 14.0
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.77, 0.91, 0.63, 1)
+text = "  /  LIVE SIMULATION"
+
+[node name="Space" type="Control" parent="Rows/Header"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Bay" type="Label" parent="Rows/Header"]
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.64, 0.71, 0.68, 1)
+text = "BAY 05 / WET BENCH  "
+
+[node name="Preview" type="Control" parent="Rows"]
+custom_minimum_size = Vector2(520, 220)
+size_flags_vertical = 3
+clip_contents = true
+mouse_filter = 2
+script = ExtResource("script")
+
+[node name="Background" type="ColorRect" parent="Rows/Preview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.12, 0.20, 0.22, 1)
+
+[node name="Stage" type="Node2D" parent="Rows/Preview"]
+position = Vector2(20, -35)
+scale = Vector2(0.55, 0.55)
+
+[node name="ServiceWall" type="Node2D" parent="Rows/Preview/Stage"]
+position = Vector2(-145, 0)
+modulate = Color(0.8, 0.9, 0.87, 0.75)
+script = ExtResource("scenery")
+sheet = ExtResource("sheet")
+
+[node name="WetBench" parent="Rows/Preview/Stage" instance=ExtResource("deck")]
+position = Vector2(-190, 510)
+collision_layer = 0
+collision_mask = 0
+width = 575
+station = "05  Wet bench"
+
+[node name="TestRack" parent="Rows/Preview/Stage" instance=ExtResource("deck")]
+position = Vector2(780, 450)
+collision_layer = 0
+collision_mask = 0
+station = "06  Test rack"
+
+[node name="GreenLift" parent="Rows/Preview/Stage" instance=ExtResource("lift")]
+position = Vector2(330, 501)
+launch_speed = 1160.0
+monitoring = false
+monitorable = false
+
+[node name="Green09" parent="Rows/Preview/Stage" instance=ExtResource("dot")]
+position = Vector2(436, 240)
+monitoring = false
+monitorable = false
+
+[node name="Green10" parent="Rows/Preview/Stage" instance=ExtResource("dot")]
+position = Vector2(684, 208)
+monitoring = false
+monitorable = false
+
+[node name="Runner" type="AnimatedSprite2D" parent="Rows/Preview/Stage"]
+position = Vector2(140, 485)
+scale = Vector2(0.105, 0.105)
+sprite_frames = ExtResource("poses")
+animation = &"run"
+
+[node name="Footer" type="HBoxContainer" parent="Rows"]
+custom_minimum_size = Vector2(0, 42)
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Rows/Footer"]
+offset_left = 14.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("display")
+theme_override_font_sizes/font_size = 19
+text = "  THE GREEN LIFT"
+
+[node name="Note" type="Label" parent="Rows/Footer"]
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.61, 0.69, 0.66, 1)
+text = "Step on. Hold right.  "
+
+[node name="Rule" type="ColorRect" parent="Rows"]
+custom_minimum_size = Vector2(0, 3)
+mouse_filter = 2
+color = Color(0.77, 0.91, 0.63, 1)

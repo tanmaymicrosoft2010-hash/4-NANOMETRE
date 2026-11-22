@@ -6,8 +6,8 @@ var shown_tenths := -1
 func setup() -> void:
 	%Site.text = GameState.site_name().to_upper()
 	%Title.text = "L%d / %s" % [GameState.selected_level, GameState.JOBS[GameState.selected_level - 1]]
-	set_clock(GameState.BOMB_SECONDS)
-	set_line(GameState.START_STABILITY)
+	set_clock(GameState.fuse_seconds())
+	set_line(GameState.start_stability())
 
 
 func set_clock(seconds: float, accelerated := false) -> void:

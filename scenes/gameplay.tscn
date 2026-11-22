@@ -54,6 +54,8 @@ text = "BATCH   N° 001"
 [node name="Task" type="Label" parent="Bench/Console/Slip/Print"]
 unique_name_in_owner = true
 theme_type_variation = &"Ink"
+theme_override_font_sizes/font_size = 22
+theme_override_constants/line_spacing = 5
 autowrap_mode = 3
 text = "Two wafer lots, one tray. Count the total."
 
@@ -125,7 +127,11 @@ text = "[4]"
 
 [node name="StatusLabel" type="Label" parent="Bench/Console"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
 theme_type_variation = &"Muted"
+theme_override_font_sizes/font_size = 22
+theme_override_constants/line_spacing = 7
+autowrap_mode = 3
 text = "Choose an answer, or use keys 1–4."
 
 [node name="Effects" type="Node2D" parent="."]
@@ -170,7 +176,8 @@ text = "VC EMAIL   /   INBOX"
 
 [node name="Subject" type="Label" parent="VCPopup/Mail"]
 theme_type_variation = &"Ink"
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 27
+autowrap_mode = 3
 text = "Add AI to 4nm?"
 
 [node name="Footer" type="Label" parent="VCPopup/Mail"]

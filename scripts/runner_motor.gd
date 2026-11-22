@@ -6,13 +6,15 @@ signal returned
 
 const ReturnPress := preload("res://scripts/return_press.gd")
 const SPEED := 400.0
-const GRAVITY := 1900.0
+const GRAVITY := 1975.0
 const JUMP := -560.0
 const GROUND_ACCEL := 3400.0
 const GROUND_BRAKE := 5200.0
 const AIR_ACCEL := 1900.0
 const FALL_LIMIT := 1200.0
 const CLIMB_SPEED := 240.0
+
+@export var use_climb_animation := true
 
 var last_floor: StaticBody2D
 var press: ReturnPress
@@ -23,6 +25,7 @@ var buffered_jump := 0.0
 @onready var chassis: AnimatedSprite2D = $Chassis
 @onready var sole: float = $Collider.shape.size.y * 0.5
 @onready var ladder_sense: Area2D = $LadderSense
+@onready var chassis_rest := chassis.position
 
 
 func _ready() -> void:
@@ -109,7 +112,7 @@ func _start_climb() -> void:
 	buffered_jump = 0.0
 	collision_mask = 0
 	global_position.x = ladder.center_x()
-	chassis.play(&"idle")
+	_animate_climb()
 
 
 func _climb(delta: float, direction: float) -> void:
@@ -134,16 +137,35 @@ func _climb(delta: float, direction: float) -> void:
 	if step < 0.0 and global_position.y <= top - sole + 0.5:
 		_stop_climb()
 		return
-	if step != 0.0:
+	if use_climb_animation and chassis.sprite_frames.has_animation(&"climb"):
+		_animate_climb()
+	elif step != 0.0:
 		chassis.play(&"run")
 	else:
 		chassis.play(&"idle")
+
+
+func _animate_climb() -> void:
+	if not use_climb_animation or not chassis.sprite_frames.has_animation(&"climb"):
+		chassis.play(&"idle")
+		return
+	# Advance by distance, not time: stopping holds the pose, descending reverses it.
+	var rung_phase: float = (ladder.global_position.y - global_position.y) / 22.0
+	var count := chassis.sprite_frames.get_frame_count(&"climb")
+	chassis.animation = &"climb"
+	chassis.pause()
+	chassis.frame = posmod(floori(rung_phase), count)
+	chassis.flip_h = false
+	chassis.rotation = sin(rung_phase * PI) * 0.045
+	chassis.position = chassis_rest + Vector2(sin(rung_phase * PI) * 1.2, 0)
 
 
 func _stop_climb() -> void:
 	climbing = false
 	collision_mask = 1
 	ladder = null
+	chassis.rotation = 0.0
+	chassis.position = chassis_rest
 
 
 func _ladder_entered(area: Area2D) -> void:
@@ -153,10 +175,10 @@ func _ladder_entered(area: Area2D) -> void:
 
 func _ladder_exited(area: Area2D) -> void:
 	if area == ladder:
-		ladder = null
 		if climbing:
-			climbing = false
-			collision_mask = 1
+			_stop_climb()
+		else:
+			ladder = null
 
 
 func reset_at(checkpoint: Vector2) -> void:

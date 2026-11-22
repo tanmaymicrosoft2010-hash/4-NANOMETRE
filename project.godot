@@ -20,6 +20,7 @@ boot_splash/show_image=false
 [autoload]
 
 GameState="*res://scripts/game_state.gd"
+BackgroundMusic="*res://scenes/background_music.tscn"
 
 [display]
 

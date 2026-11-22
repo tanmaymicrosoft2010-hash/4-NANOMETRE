@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/end_screen.gd" id="script"]
 [ext_resource type="PackedScene" path="res://ui/desk.tscn" id="desk"]
+[ext_resource type="AudioStream" path="res://assets/audio/gta-san-andreas-abertura-oficial.mp3" id="passed"]
+[ext_resource type="AudioStream" path="res://assets/audio/meme-violin-sad-violin.mp3" id="failed"]
 
 [node name="EndScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("script")
+passed_sound = ExtResource("passed")
+failed_sound = ExtResource("failed")
+
+[node name="ResultSound" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
 
 [node name="Desk" parent="." instance=ExtResource("desk")]
 
@@ -18,7 +25,7 @@ offset_bottom = -64.0
 
 [node name="Report" type="VBoxContainer" parent="Center"]
 custom_minimum_size = Vector2(840, 0)
-theme_override_constants/separation = 22
+theme_override_constants/separation = 14
 
 [node name="Kicker" type="Label" parent="Center/Report"]
 theme_type_variation = &"Tag"
@@ -28,7 +35,7 @@ text = "SHIFT REPORT   /   CEO GPU"
 theme_type_variation = &"Ticket"
 
 [node name="Print" type="VBoxContainer" parent="Center/Report/Receipt"]
-theme_override_constants/separation = 15
+theme_override_constants/separation = 12
 
 [node name="Order" type="Label" parent="Center/Report/Receipt/Print"]
 unique_name_in_owner = true
@@ -38,7 +45,7 @@ text = "LEVEL 01   /   CORE RUN"
 [node name="ResultLabel" type="Label" parent="Center/Report/Receipt/Print"]
 unique_name_in_owner = true
 theme_type_variation = &"Title"
-theme_override_font_sizes/font_size = 62
+theme_override_font_sizes/font_size = 54
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "CLEARED"
 
@@ -104,13 +111,20 @@ text = "NEXT JOB"
 
 [node name="Status" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
 theme_type_variation = &"Heading"
-theme_override_font_sizes/font_size = 32
-text = "LEVEL 2 - UNDER PROGRESS"
+theme_override_font_sizes/font_size = 28
+text = "LEVEL 2  /  WAFER SORT"
 
 [node name="Note" type="Label" parent="Center/Report/Receipt/Print/NextPanel/Next"]
 theme_type_variation = &"Muted"
-theme_override_font_sizes/font_size = 20
-text = "The math console is still being built. Level 1 is done."
+theme_override_font_sizes/font_size = 19
+theme_override_constants/line_spacing = 6
+autowrap_mode = 3
+text = "Clear wafer batches before the fuse runs out."
+
+[node name="NextLevelButton" type="Button" parent="Center/Report/Receipt/Print/NextPanel/Next"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+text = "Start Level 2  →"
 
 [node name="Actions" type="HBoxContainer" parent="Center/Report"]
 
@@ -126,3 +140,4 @@ text = "Home"
 
 [connection signal="pressed" from="Center/Report/Actions/PrimaryButton" to="." method="_continue_shift"]
 [connection signal="pressed" from="Center/Report/Actions/HomeButton" to="." method="_home"]
+[connection signal="pressed" from="Center/Report/Receipt/Print/NextPanel/Next/NextLevelButton" to="." method="_start_level_two"]

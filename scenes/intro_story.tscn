@@ -22,6 +22,7 @@ custom_minimum_size = Vector2(1040, 0)
 theme_override_constants/separation = 18
 
 [node name="Address" type="Label" parent="Center/Stack"]
+unique_name_in_owner = true
 theme_type_variation = &"Tag"
 text = "4 NANO METRE   /   NIGHT SHIFT"
 
@@ -77,7 +78,8 @@ text = "The bomb is real."
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 180)
 theme_type_variation = &"Ink"
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 21
+theme_override_constants/line_spacing = 7
 autowrap_mode = 3
 text = "GPU, there is a bomb under the wafer line at the 4 Nano Metre fab. The core door is open. Get there and cut the power.
 

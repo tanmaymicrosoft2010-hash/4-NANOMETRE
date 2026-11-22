@@ -69,6 +69,8 @@ text = "Silicon Valley"
 unique_name_in_owner = true
 theme_type_variation = &"Ink"
 custom_minimum_size = Vector2(0, 86)
+theme_override_font_sizes/font_size = 21
+theme_override_constants/line_spacing = 6
 autowrap_mode = 3
 text = "Investor emails cover the console every 12 seconds. Clear the inbox; the clock keeps running."
 
@@ -88,7 +90,7 @@ theme_type_variation = &"Ticket"
 [node name="Code" type="Label" parent="Center/Dispatch/Cards/East/Details/Site"]
 theme_type_variation = &"InkTag"
 size_flags_horizontal = 3
-text = "IN   /   INDIA"
+text = "CN   /   CHINA"
 
 [node name="EastPaint" type="ColorRect" parent="Center/Dispatch/Cards/East/Details/Site"]
 unique_name_in_owner = true
@@ -109,19 +111,21 @@ mouse_filter = 2
 [node name="Region" type="Label" parent="Center/Dispatch/Cards/East/Details"]
 theme_type_variation = &"InkHeading"
 theme_override_font_sizes/font_size = 28
-text = "Ind Fab"
+text = "Shenzhen"
 
 [node name="EastNote" type="Label" parent="Center/Dispatch/Cards/East/Details"]
 unique_name_in_owner = true
 theme_type_variation = &"Ink"
 custom_minimum_size = Vector2(0, 86)
+theme_override_font_sizes/font_size = 21
+theme_override_constants/line_spacing = 6
 autowrap_mode = 3
-text = "A grid dip dims the console every 12 seconds. You can still work by the backup light."
+text = "Hard shift. A power dip dims the console every 10 seconds and hits cost more stability."
 
-[node name="IndiaButton" type="Button" parent="Center/Dispatch/Cards/East/Details"]
+[node name="ShenzhenButton" type="Button" parent="Center/Dispatch/Cards/East/Details"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
-text = "Enter Ind Fab"
+text = "Enter Shenzhen"
 
 [connection signal="pressed" from="Center/Dispatch/Cards/West/Details/USAButton" to="." method="_choose" binds=["USA"]]
-[connection signal="pressed" from="Center/Dispatch/Cards/East/Details/IndiaButton" to="." method="_choose" binds=["INDIA"]]
+[connection signal="pressed" from="Center/Dispatch/Cards/East/Details/ShenzhenButton" to="." method="_choose" binds=["SHENZHEN"]]

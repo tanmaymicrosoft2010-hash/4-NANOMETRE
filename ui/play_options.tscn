@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/play_options.gd" id="script"]
+
+[node name="PlayOptions" type="HBoxContainer"]
+theme_override_constants/separation = 10
+script = ExtResource("script")
+
+[node name="Sound" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 44)
+theme_override_font_sizes/font_size = 22
+text = "Sound: on"
+
+[node name="Screen" type="Button" parent="."]
+custom_minimum_size = Vector2(165, 44)
+theme_override_font_sizes/font_size = 22
+text = "Fullscreen"
+
+[connection signal="pressed" from="Sound" to="." method="_toggle_sound"]
+[connection signal="pressed" from="Screen" to="." method="_toggle_screen"]

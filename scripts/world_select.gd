@@ -11,12 +11,12 @@ func _ready() -> void:
 		%GridSign.hide()
 		%WestPaint.show()
 		%EastPaint.show()
-		%WestNote.text = "Blue steel rail. Cold inspection light.\n" + _floor_record("USA")
-		%EastNote.text = "Brown steel rail. Amber work light.\n" + _floor_record("INDIA")
+		%WestNote.text = "Standard shift: 4:45 fuse; hits cost 6 seconds.\n" + _floor_record("USA")
+		%EastNote.text = "Hard shift: 3:45 fuse; hits cost 8 seconds.\n" + _floor_record("SHENZHEN")
 	else:
 		%Terminal.texture = TERMINAL
 		%GridSign.texture = GRID_SIGN
-	var previous: Button = %IndiaButton if GameState.selected_world == "INDIA" else %USAButton
+	var previous: Button = %ShenzhenButton if GameState.selected_world == "SHENZHEN" else %USAButton
 	previous.grab_focus()
 
 

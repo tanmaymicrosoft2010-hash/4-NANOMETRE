@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause_shift") or ($Shade.visible and event.is_action_pressed("ui_cancel")):
+	if event.is_action_pressed("pause_shift") or event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		if $Shade.visible:
 			_resume()
@@ -30,12 +30,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			_take_break()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and OS.has_feature("web") and is_node_ready():
+		if not get_tree().paused and not $Shade.visible:
+			_take_break()
+
+
 func _take_break() -> void:
 	previous_focus = get_viewport().gui_get_focus_owner()
 	%JumpKey.visible = GameState.selected_level == 1
 	_label_jump_key()
-	var back_path := %Resume.get_path_to(%JumpKey) if %JumpKey.visible else ^"../Leave"
-	%Resume.focus_previous = back_path
+	%Resume.focus_previous = %Resume.get_path_to(%JumpKey) if %JumpKey.visible else ^"../Leave"
 	%Leave.focus_next = %Leave.get_path_to(%JumpKey) if %JumpKey.visible else ^"../Resume"
 	get_tree().paused = true
 	$PauseButton.hide()
@@ -54,7 +59,7 @@ func _resume() -> void:
 
 func _leave() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file(GameState.FACTORIES if GameState.floor_dispatch else GameState.ORDERS)
+	get_tree().change_scene_to_file(GameState.HOME)
 
 
 func _listen_for_jump() -> void:

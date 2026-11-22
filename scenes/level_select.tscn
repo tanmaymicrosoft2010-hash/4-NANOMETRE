@@ -18,11 +18,11 @@ offset_bottom = -64.0
 
 [node name="Board" type="VBoxContainer" parent="Center"]
 custom_minimum_size = Vector2(1050, 0)
-theme_override_constants/separation = 18
+theme_override_constants/separation = 14
 
 [node name="Kicker" type="Label" parent="Center/Board"]
 theme_type_variation = &"Tag"
-text = "OPEN WORK ORDERS   /   90 SECONDS EACH"
+text = "OPEN WORK ORDERS   /   FUSE LIMITS BY SITE"
 
 [node name="Header" type="HBoxContainer" parent="Center/Board"]
 
@@ -56,9 +56,11 @@ text = "Core run"
 
 [node name="Task" type="Label" parent="Center/Board/Jobs/Run/Slip"]
 theme_type_variation = &"Ink"
-custom_minimum_size = Vector2(0, 84)
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 18
+theme_override_constants/line_spacing = 5
 autowrap_mode = 3
-text = "Reach the core or pick up ten chips. Green pads give you a lift."
+text = "Reach the core before the site fuse runs out. Green dots add time; red dots and falls take it away."
 
 [node name="RunRecord" type="Label" parent="Center/Board/Jobs/Run/Slip"]
 unique_name_in_owner = true
@@ -87,7 +89,9 @@ text = "Wafer sort"
 
 [node name="Task" type="Label" parent="Center/Board/Jobs/Sort/Slip"]
 theme_type_variation = &"Ink"
-custom_minimum_size = Vector2(0, 84)
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 18
+theme_override_constants/line_spacing = 5
 autowrap_mode = 3
 text = "Sign off 15 batches. Each right answer puts 10 points on the board."
 
@@ -118,7 +122,9 @@ text = "Final test"
 
 [node name="Task" type="Label" parent="Center/Board/Jobs/Test/Slip"]
 theme_type_variation = &"Ink"
-custom_minimum_size = Vector2(0, 84)
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 18
+theme_override_constants/line_spacing = 5
 autowrap_mode = 3
 text = "Sign off 20 batches. Bigger lots mean trickier arithmetic."
 
@@ -143,7 +149,11 @@ mouse_filter = 2
 
 [node name="Hazard" type="Label" parent="Center/Board/SiteNote"]
 unique_name_in_owner = true
+size_flags_horizontal = 3
 theme_type_variation = &"Muted"
+theme_override_font_sizes/font_size = 21
+theme_override_constants/line_spacing = 6
+autowrap_mode = 3
 text = "Investor mail interrupts the console."
 
 [connection signal="pressed" from="Center/Board/Header/BackButton" to="." method="_back"]
